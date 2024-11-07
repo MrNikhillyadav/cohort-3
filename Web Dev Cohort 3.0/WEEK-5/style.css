@@ -1,0 +1,44 @@
+@font-face {
+      font-family: light;
+      src: url('./Poppins-Light.ttf');
+  }
+@font-face {
+      font-family: medium;
+      src: url('./Poppins-Medium.ttf');
+  }
+@font-face {
+      font-family: bold;
+      src: url('./Poppins-SemiBold.ttf');
+  }
+
+body{
+      color: rgb(50, 49, 53);
+}
+
+.data-container{
+      padding: 10px 50px;
+      margin: 2px 25px;
+      border-radius: 20px;
+}
+.newDiv{
+      border-radius: 10px  ;
+      border: 1px solid rgba(163, 163, 249, 0.747);
+      background-color: rgba(222, 222, 240, 0.874);
+      margin: 5px ;
+      margin-bottom: 10px;
+      padding: 5px 15px ;
+}
+h1{   
+      font-family: bold;
+      font-variant-caps:titling-caps;
+      text-align: center;
+}
+.data-container .title{
+      text-transform: uppercase;
+      font-family: medium;
+      font-size: 20px;
+}
+.data-container p{
+      font-family: light;
+      font-size: 16px;
+}

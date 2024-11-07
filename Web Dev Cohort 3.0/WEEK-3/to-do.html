@@ -1,0 +1,79 @@
+<html>
+    <head>
+        <title>To Do app</title>
+        <link rel="stylesheet" href="style.css">
+    </head>
+    <body>
+        <div class="container">
+            <h1>To-do app</h1>
+            <input type="text" placeholder="Add your tasks here">
+            <button onclick='addToDo()'>Add</button>
+            <div id="todoList"></div>
+        </div>
+    </body>
+
+    <script>
+        let count = 1;
+
+        // Load existing to-dos from localStorage on page load
+        window.onload = function() {
+            const todos = JSON.parse(localStorage.getItem('todos')) || [];
+            todos.forEach(todo => {
+                addToDoElement(todo);
+            });
+        };
+
+        function deleteToDo(newDivEl, todo) {
+            newDivEl.remove();
+            removeFromLocalStorage(todo);
+        }
+
+        function addToDo() {
+            const inputValue = document.querySelector('input').value;
+            if (inputValue.trim() === '') return; // Prevent adding empty tasks
+
+            addToDoElement(inputValue);
+            saveToLocalStorage(inputValue);
+            document.querySelector('input').value = '';
+            count++;
+        }
+
+        function addToDoElement(todo) {
+                const spanEl = document.createElement('span');
+                spanEl.setAttribute('id', `to-do-${count}`);
+                spanEl.className = 'todo-text';
+                spanEl.innerHTML = todo;
+
+                const buttonEl = document.createElement('button');
+                buttonEl.innerHTML = 'Delete';
+                buttonEl.className = 'delete-button';
+
+                const newDivEl = document.createElement('div');
+                newDivEl.className = 'todo-item';
+
+                buttonEl.onclick = function() { 
+                    deleteToDo(newDivEl, todo);
+                }
+
+                newDivEl.appendChild(spanEl);
+                newDivEl.appendChild(buttonEl);
+                
+                document.getElementById('todoList').appendChild(newDivEl);
+            }
+
+        function saveToLocalStorage(todo) {
+            const todos = JSON.parse(localStorage.getItem('todos')) || [];
+            todos.push(todo);
+            localStorage.setItem('todos', JSON.stringify(todos));
+        }
+
+        function removeFromLocalStorage(todo) {
+            let todos = JSON.parse(localStorage.getItem('todos')) || [];
+            todos = todos.filter(item => item !== todo); // Remove the deleted todo
+            localStorage.setItem('todos', JSON.stringify(todos));
+        }
+
+        console.log(localStorage.getItem('todos'))
+
+    </script>
+</html>
