@@ -1,4 +1,6 @@
 const mongoose = require('mongoose');
+const Schema = mongoose.Schema;
+const ObjectId = mongoose.Types.ObjectId;
 
 // Connect to MongoDB
 mongoose.connect('mongodb://localhost:27017/hard-todo')
@@ -14,7 +16,7 @@ const UserSchema = new mongoose.Schema({
 });
 
 const TodoSchema = new mongoose.Schema({
-    userId : String,
+    userId : ObjectId,
     title : String,
     done : Boolean
 });

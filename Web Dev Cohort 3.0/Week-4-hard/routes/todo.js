@@ -1,13 +1,15 @@
 const { Router } = require("express");
 const adminMiddleware = require("../middleware/user");
 const {UserModel,TodoModel} = require('../database/index')
+const userMiddleware = require("../middleware/user");
 const router = Router();
 
-router.post('/', async(req, res) => {
-    
+router.post('/',userMiddleware, async(req, res) => {
     const title = req.body.title;
     const done = req.body.done;
+
     const userId = req.userId
+    console.log('todo-> userId: ', userId);
 
     try {
         const newToDo = await TodoModel.create({
@@ -24,9 +26,7 @@ router.post('/', async(req, res) => {
         res.status(403).json({
             message : "error creating  new todo"
         })
-    }
-
-   
+    }  
 });
 
 router.put('/', adminMiddleware, (req, res) => {

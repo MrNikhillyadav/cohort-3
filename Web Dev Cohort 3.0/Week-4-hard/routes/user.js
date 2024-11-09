@@ -72,7 +72,9 @@ router.post('/login', async(req, res) => {
             const token = await jwt.sign({
                 userId : user._id.toString()
             } , Secret_Key);
-    
+
+            console.log('login -> userId: ', user._id.toString());
+            
             res.json({
                 message : "sign in successfully",
                 token : token
@@ -94,35 +96,36 @@ router.post('/login', async(req, res) => {
 });
 
 router.get('/todos', userMiddleware, async(req, res) => {
-    const userId = req.userId
-    console.log(userId)
+        const userId = req.userId
+        console.log('todos-> userId: ', userId);
 
-   try{
-       const todos = await TodoModel.find({
-            userId : userId
-       })
-
-       if (!todos){
-            res.json({
-                message : "No todos found"
-            })
-       }
-       else{
-
-            res.json({
-                todos: todos,
+        try{
+           
+            todos = await TodoModel.find({
                 userId : userId
+            })
+
+            if (!todos){
+                res.json({
+                    message : "No todos found"
+                })
+            }
+            else{
+
+                res.json({
+                    todos: todos,
+                    userId : userId
+                
+                })
+            }
+        } catch(e){
+
+            res.json({
+                message : `Error : ${e}`
             
             })
-       }
-   } catch(e){
+        }
 
-        res.json({
-           message : `Error : ${e}`
-        
-        })
-   }
-    
 });
 
 
