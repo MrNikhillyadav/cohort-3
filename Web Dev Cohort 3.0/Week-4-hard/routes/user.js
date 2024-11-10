@@ -24,9 +24,7 @@ router.post('/signup', async(req, res) => {
         return
     }
 
-    const username = req.body.username;
-    const email = req.body.email;
-    const password = req.body.password;
+    const {username ,email,password} = req.body;
 
     let thrownError = false
     try{
@@ -56,8 +54,7 @@ router.post('/signup', async(req, res) => {
 });
 
 router.post('/login', async(req, res) => {
-    const email = req.body.email;
-    const password = req.body.password
+    const {email,password} = req.body;
 
 
     const user = await UserModel.findOne({
@@ -97,12 +94,10 @@ router.post('/login', async(req, res) => {
 
 router.get('/todos', userMiddleware, async(req, res) => {
         const userId = req.userId
-        console.log('todos-> userId: ', userId);
 
         try{
-           
             todos = await TodoModel.find({
-                userId : userId
+                todoId : userId 
             })
 
             if (!todos){
@@ -115,7 +110,6 @@ router.get('/todos', userMiddleware, async(req, res) => {
                 res.json({
                     todos: todos,
                     userId : userId
-                
                 })
             }
         } catch(e){
@@ -128,9 +122,7 @@ router.get('/todos', userMiddleware, async(req, res) => {
 
 });
 
-
 router.post('/logout', userMiddleware, (req, res) => {
-
 
 });
 

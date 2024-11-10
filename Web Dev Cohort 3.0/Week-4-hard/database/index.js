@@ -16,7 +16,7 @@ const UserSchema = new mongoose.Schema({
 });
 
 const TodoSchema = new mongoose.Schema({
-    userId : ObjectId,
+    todoId : ObjectId,
     title : String,
     done : Boolean
 });

@@ -3,7 +3,6 @@ const jwt = require('jsonwebtoken')
 
 function userMiddleware (req, res, next) {
     const token = req.headers.token;    
-    console.log('Auth-token: ', token);
     
     const decodedResponseObj =  jwt.verify(token,Secret_Key);
 
@@ -14,7 +13,8 @@ function userMiddleware (req, res, next) {
             next()
       }else{
             res.json({
-                  message : 'You are not logged in'
+                  message : 'You are not logged in',
+                  userId : req.userId,
             })
       }
 }
