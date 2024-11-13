@@ -20,7 +20,8 @@ router.post('/', userMiddleware, async(req, res) => {
         res.json({
             message : "added todo ",
             newTodo : newToDo.title,
-            todoId : userId 
+            todoId : userId ,
+            _id : newToDo._id  //newly-created //57min left Week-8 offline
         })
     }catch(e){
         res.status(403).json({

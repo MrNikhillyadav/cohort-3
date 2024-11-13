@@ -1,0 +1,65 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+      <meta charset="UTF-8">
+      <meta name="viewport" content="width=device-width, initial-scale=1.0">
+      <title>counter</title>
+      <style>
+            body{
+                  display: flex;
+                  justify-content: center;
+                  align-items: center;
+            }
+            .container {
+                  cursor: pointer;
+                  text-align: center;
+                  background-color: blue;
+                  color: white;
+                  font-size: 20px;
+                  border: none;
+                  padding: 6px 12px;
+                  border-radius: 10px;
+            }
+            .box{
+                  display: flex;
+                  gap: 8px;
+                  margin-top: 10px;
+            }
+      </style>
+</head>
+<body>
+      <div class="box">
+
+            <button class="addBtn"> + </button>
+            <button class="container">Counter:<span> 0</span> </button>
+            <button class="subBtn"> - </button>
+      </div>
+
+      <script>
+            let counter = 0;
+           const el = document.querySelector('span').innerHTML
+           const button = document.querySelector('.container');
+
+           const addBtn =  document.querySelector('.addBtn')
+           const subBtn =  document.querySelector('.subBtn')
+
+           addBtn.addEventListener('click',increment)
+           subBtn.addEventListener('click',decrement)
+
+            function decrement(){
+            
+                  if(counter <= 0){
+                        return counter = 0
+                  }else{
+                        counter--
+                        document.querySelector('span').innerHTML = counter
+                  }      
+            }
+            function increment(){   
+                  counter++
+                 document.querySelector('span').innerHTML = counter
+            }
+      </script>
+      
+</body>
+</html>
