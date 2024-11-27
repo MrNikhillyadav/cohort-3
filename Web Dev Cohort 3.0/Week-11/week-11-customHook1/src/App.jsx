@@ -1,15 +1,24 @@
 import './App.css'
-import { usePrev } from './hooks/usePrev';
-import { useCount } from './hooks/useCount';
+import { useEffect, useRef, useState } from 'react';
+import { useDebounce } from './hooks/useDebounce';
 
- function App() {
-  const {count,incrementCount} = useCount()
-  const prev = usePrev(count)
- 
+
+function App() {
+  const [inputVal,setInputVal] = useState()
+  const debounceFn = useDebounce(inputVal)
+
+  function change(e){
+    setInputVal(e.target.value)
+  }
+
+  useEffect(()=>{
+    console.log('expensive fn')
+    
+  },[debounceFn])
+
   return (
-    <>
-      <button onClick={incrementCount}>Increase : {count}</button>
-      <p>previous value : {prev}</p>
+    <> 
+      <input onChange={change} type="text" />
     </>
   )
 }
