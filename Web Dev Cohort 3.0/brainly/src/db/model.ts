@@ -1,3 +1,4 @@
+import mongoose from "mongoose";
 import { model, Model,Schema } from "mongoose";
 
 const UserSchema = new Schema ({
@@ -18,8 +19,8 @@ const contentSchema = new Schema({
           link: { type: String, required: true },
           type: { type: String, required: true },
           title: { type: String, required: true },
-          tags: [{ type: Types.ObjectId, ref: 'Tag' }],
-          userId: { type: Types.ObjectId, ref: 'User', required: true },
+          tags: [{ type: mongoose.Types.ObjectId, ref: 'Tag' }],
+          userId: { type: mongoose.Types.ObjectId, ref: 'User', required: true },
         });
 
 export const ContentModel = model('content', contentSchema);

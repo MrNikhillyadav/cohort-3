@@ -1,7 +1,10 @@
 import express from 'express';
 import mongoose from 'mongoose'
 import jwt from 'jsonwebtoken'
-// import {UserModel} from 
+import { ContentModel, UserModel } from './db/model';
+import { populate } from './../node_modules/dotenv/lib/main.d';
+import { userMiddleware } from './userMiddleware';
+import { JWT_PASSWORD } from './config';
 
 const app = express();
 
@@ -36,24 +39,85 @@ app.post('/api/v1/signup',async(req,res) => {
           
 })
 
-app.post('/api/v1/signin',(req,res) => {
+app.post('/api/v1/signin',async(req,res) => {
+          const {username, password} = req.body
 
+          try{
+                    const ExistingUser = await UserModel.findOne({
+                              username,
+                              password
+                    })
+
+                    if(ExistingUser){
+                              const token = jwt.sign({
+                                        _id : ExistingUser._id
+                              },JWT_PASSWORD)
+
+                              res.json({
+                                        token
+                              })
+                    }else{
+                              res.json({
+                                        error : 'invalid credentials'
+                              })
+                    }
+
+          }
+          catch(e){
+
+                    res.json({
+                              error : 'User do not  exist'
+                    })
+          }
+
+          
 })
 
-app.post('/api/v1/content',(req,res) => {
+app.post('/api/v1/content',userMiddleware,async (req,res) => {
+          const {title,link,type} = req.body
 
-})
+          const content = await ContentModel.create({
+                    title,
+                    link,
+                    type,
+                    //@ts-ignore
+                    userId : req.userId
 
-app.get('/api/v1/content',(req,res) => {
+          })
 
           res.json({
-                    "status": 200,
-                    "message": "Content fetched successfully",
+                    message : 'Content posted!'
+          })
+
+
+})
+
+app.get('/api/v1/content',userMiddleware,async(req,res) => {
+          //@ts-ignore
+          const userId = req.userId ;
+
+          const content = await ContentModel.find({
+                    userId : userId
+          })
+
+          res.json({
+                    content
           })
 })
 
-app.delete('/api/v1/content',(req,res) => {
+app.delete('/api/v1/content/:id',userMiddleware,async(req,res) => {
+          const contentId = req.params.id;
 
+          const deleted = await ContentModel.deleteOne({
+                    contentId,
+                    //@ts-ignore
+                    userId : req.userId
+          })
+
+          res.json({
+                    message : 'Content deleted!',
+                    deleted
+          })
 })
 
 app.post('/api/v1/brain/share',(req,res) => {
