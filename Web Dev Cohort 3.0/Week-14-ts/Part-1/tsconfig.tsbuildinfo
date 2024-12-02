@@ -1,1 +1,1 @@
-{"root":["./abstractclass.ts","./arrays.ts","./class.ts","./enums.ts","./index.ts","./tempcoderunnerfile.ts"],"version":"5.7.2"}
+{"root":["./src/abstractclass.ts","./src/arrays.ts","./src/class.ts","./src/enums.ts","./src/index.ts"],"version":"5.7.2"}
