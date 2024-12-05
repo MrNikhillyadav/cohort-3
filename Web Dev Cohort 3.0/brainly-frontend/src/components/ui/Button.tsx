@@ -7,6 +7,7 @@ interface ButtonInterface{
   endIcon?: ReactElement,
   variant : 'primary'|'secondary'|'submit',
   onClick?: () => void;
+  loading?:boolean
 
 }
 
@@ -24,7 +25,7 @@ const ButtonVariants = {
 
 export  function Button(props : ButtonInterface){ 
   return (
-    <button  onClick={props.onClick} className={`flex  items-center justify-center ${ButtonVariants[props.variant]}   ${sizeStyles[props.size]}`}>
+    <button  onClick={props.onClick} className={`flex  items-center justify-center ${ButtonVariants[props.variant]} ${props.loading && 'bg-opacity-50' }  ${sizeStyles[props.size]}`}>
       {props.startIcon}
       <span  className="pl-2 pr-2">
           {props.title}

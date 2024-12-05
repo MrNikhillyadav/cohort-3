@@ -1,5 +1,6 @@
 import { CrossIcon } from "../../icons/CrossIcon"
 import { Button } from "./Button"
+import { Input } from "./Input"
 
 interface ModalInterface {
         open : boolean,
@@ -21,7 +22,7 @@ export function CreateContentModal({open, onClose}:ModalInterface){
                                 </div>
 
                                 <div className=" flex flex-col justify-center items-center w-full gap-2">
-                                        <Input placeholder={'title'}/>
+                                        <Input  placeholder={'title'}/>
                                         <Input placeholder={'link'}/>
                                         <Button   variant="submit" size="md" title="Submit"/>
 
@@ -37,10 +38,3 @@ export function CreateContentModal({open, onClose}:ModalInterface){
 }
 
 
-function Input({onChange,placeholder} : {onChange: () => void}){
-        return (
-                <div className="flex w-full gap-2 flex-col">
-                        <input type="text" placeholder={placeholder} onChange={onChange} className="rounded-md p-2 border-2 outline-none  border-gray-400"/>
-                </div>
-        )
-}
