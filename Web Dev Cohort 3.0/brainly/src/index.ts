@@ -1,16 +1,16 @@
+import cors from 'cors'
 import express from 'express';
 import mongoose from 'mongoose'
 import jwt from 'jsonwebtoken'
 import { ContentModel, LinkModel, UserModel } from './db/model';
-import { populate } from './../node_modules/dotenv/lib/main.d';
 import { userMiddleware } from './userMiddleware';
 import { JWT_PASSWORD, random } from './config';
 import {z} from 'zod'
 import bcrypt from 'bcrypt'
 
-
 const app = express();
 
+app.use(cors());
 app.use(express.json())
 
 mongoose.connect("mongodb://localhost:27017/brainly")
@@ -25,6 +25,7 @@ app.post('/api/v1/signup',async(req,res) => {
           })
 
           const parsedDataWithSuccess = requireBody.safeParse(req.body)
+          console.log('parsedDataWithSuccess: ', parsedDataWithSuccess);
           if(!parsedDataWithSuccess.success){
                     res.status(400).json({
                           message : "Incorrect format",
@@ -35,10 +36,12 @@ app.post('/api/v1/signup',async(req,res) => {
 
           try{      
                    const hashedPassword = bcrypt.hash(password,5)
+                   console.log('hashedPassword: ', hashedPassword);
                     const user = await UserModel.create({
                               username,
                               hashedPassword
                     })
+                    console.log('user')
 
                     res.status(200).json({
                               message: 'signed up',
@@ -48,7 +51,7 @@ app.post('/api/v1/signup',async(req,res) => {
           catch(e){
 
                     res.json({
-                              error : 'user already exists'
+                              msg : "errorrrrrr"
                     })
           }
          
