@@ -6,7 +6,6 @@ import { ContentModel, LinkModel, UserModel } from './db/model';
 import { userMiddleware } from './userMiddleware';
 import { JWT_PASSWORD, random } from './config';
 import {z} from 'zod'
-import bcrypt from 'bcrypt'
 
 const app = express();
 
@@ -16,93 +15,54 @@ app.use(express.json())
 mongoose.connect("mongodb://localhost:27017/brainly")
 .then(() =>  console.log('db connected'))
 
-app.post('/api/v1/signup',async(req,res) => {
-          const {username, password} = req.body
-          //TODO : Zod validation | password hash
-          const requireBody = z.object({
-                    username: z.string().min(3, 'username must be at least 3 characters'),
-                    password: z.string().min(4, 'password must be at least 4 characters'),
-          })
+app.get('/',(req,res) =>{
+    res.json({
+        msg : 'Hello world'
+    })
+})
+app.post("/api/v1/signup", async (req, res) => {
+    // TODO: zod validation , hash the password
+    const username = req.body.username;
+    const password = req.body.password;
 
-          const parsedDataWithSuccess = requireBody.safeParse(req.body)
-          console.log('parsedDataWithSuccess: ', parsedDataWithSuccess);
-          if(!parsedDataWithSuccess.success){
-                    res.status(400).json({
-                          message : "Incorrect format",
-                          error : parsedDataWithSuccess.error.errors
-                    });
-                    return
-              }
+    try {
+        await UserModel.create({
+            username: username,
+            password: password
+        }) 
 
-          try{      
-                   const hashedPassword = bcrypt.hash(password,5)
-                   console.log('hashedPassword: ', hashedPassword);
-                    const user = await UserModel.create({
-                              username,
-                              hashedPassword
-                    })
-                    console.log('user')
-
-                    res.status(200).json({
-                              message: 'signed up',
-                    })
-
-          }
-          catch(e){
-
-                    res.json({
-                              msg : "errorrrrrr"
-                    })
-          }
-         
-
-          
+        res.json({
+            message: "User signed up"
+        })
+    } catch(e) {
+        res.status(411).json({
+            message: "User already exists"
+        })
+    }
 })
 
-app.post('/api/v1/signin',async(req,res) => {
-          const {username, password} = req.body
+app.post("/api/v1/signin", async (req, res) => {
+    const username = req.body.username;
+    const password = req.body.password;
 
-          
-          try{
-                    const ExistingUser = await UserModel.findOne({
-                              username,
-                              
-                    })
-                    
-                    if(ExistingUser){
-                              const PasswordMatch = bcrypt.compare(password, ExistingUser.password)
+    const existingUser = await UserModel.findOne({
+        username,
+        password
+    })
+    if (existingUser) {
+        const token = jwt.sign({
+            id: existingUser._id
+        }, JWT_PASSWORD)
 
-                              if(!PasswordMatch){
-                                        res.json({
-                                                  error : 'incorrect password'
-                                        })
-                                        return
-                              }
-
-                              const token = jwt.sign({
-                                        _id : ExistingUser._id
-                              },JWT_PASSWORD)
-
-                              res.json({
-                                        token
-                              })
-                    }else{
-                              res.json({
-                                        error : 'invalid credentials'
-                              })
-                    }
-
-          }
-          catch(e){
-
-                    res.json({
-                              error : 'User do not  exist'
-                    })
-          }
-
-          
+        res.json({
+            token
+        })
+    } else {
+        res.status(403).json({
+            message: "Incorrrect credentials"
+        })
+    }
 })
-
 app.post('/api/v1/content',userMiddleware,async (req,res) => {
           const {title,link,type} = req.body
 
@@ -112,7 +72,6 @@ app.post('/api/v1/content',userMiddleware,async (req,res) => {
                               title,
                               link,
                               type,
-                              //@ts-ignore
                               userId : req.userId
           
                     })
@@ -132,7 +91,6 @@ app.post('/api/v1/content',userMiddleware,async (req,res) => {
 })
 
 app.get("/api/v1/content", userMiddleware, async (req, res) => {
-          // @ts-ignore
           const userId = req.userId;
           console.log('userId: ', userId);
 
@@ -165,7 +123,6 @@ app.delete("/api/v1/content", userMiddleware, async (req, res) => {
       
           await ContentModel.deleteMany({
               contentId,
-              //@ts-ignore
               userId: req.userId
           })
       
