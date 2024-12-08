@@ -26,12 +26,14 @@ app.post("/api/v1/signup", async (req, res) => {
     const password = req.body.password;
 
     try {
-        await UserModel.create({
+        const user = await UserModel.create({
             username: username,
             password: password
         }) 
 
+        console.log(user)
         res.json({
+            
             message: "User signed up"
         })
     } catch(e) {
@@ -237,6 +239,6 @@ const hash = req.params.shareLink;
 
 })
 
-app.listen(4001,() =>{
-          console.log('Server is running on port 4001')
+app.listen(3000,() =>{
+          console.log(`server is listening on PORT 3000}`)
 })
