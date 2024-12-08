@@ -2,26 +2,33 @@ import { useRef } from "react";
 import { Button } from "../components/ui/Button";
 import { Input } from "../components/ui/Input";
 import axios from "axios";
-import { BACKEND_URL } from "../config";
+import { BACKEND_URL } from './../config';
+import { useNavigate } from "react-router-dom";
+
 
 export function SignUp(){
+        const Navigate = useNavigate()
         const usernameRef = useRef<HTMLInputElement>();
-        console.log('usernameRef: ', usernameRef.current);
         const passwordRef = useRef<HTMLInputElement>();
 
         async function signup(){
                 const username = usernameRef.current?.value;
+                console.log('username: ', username);
                 const password = passwordRef.current?.value;
+                console.log('password: ', password);
                 
-                await axios.post(BACKEND_URL + "/api/v1/signup", {
+                const response = await axios.post(BACKEND_URL +"/api/v1/signup", {
                         
-                        data : {
-                                username,
-                                password
-                        }
+                         
+                                username : username,
+                                password : password
+                        
+
                 })
+                console.log(response)
+                // alert(' Signup Successfull');
+                Navigate('/signin')
                 
-                alert(' Signup Successfull');
                 
         }
         return (
