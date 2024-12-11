@@ -5,7 +5,7 @@ interface ButtonInterface{
   size : "sm" | "md" |"lg";
   startIcon?: ReactElement,
   endIcon?: ReactElement,
-  variant : 'primary'|'secondary'|'submit',
+  variant : 'primary'|'secondary'|'submit'|'disable',
   onClick?: () => void;
   loading?:boolean
 
@@ -19,7 +19,8 @@ const sizeStyles = {
 
 const ButtonVariants = {
   "primary" : ' hover:bg-opacity-90 bg-blue-600 text-white',
-  "secondary" : " hover:bg-opacity-80 bg-blue-200 text-blue-600",
+  "secondary" : " hover:bg-opacity-80 bg-blue-200 text-blue-600 ",
+  "disable" : " hover:bg-opacity-80 bg-gray-200  text-blue-600 w-full",
   "submit" :  'w-full hover:bg-opacity-90 bg-blue-600 text-white',
 }
 

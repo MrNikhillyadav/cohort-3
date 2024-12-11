@@ -39,6 +39,8 @@ export function SignUp(){
                                         <Input reference={usernameRef} placeholder={'Username'}/>
                                         <Input reference={passwordRef}  placeholder={'Password'}/>
                                         <Button onClick={signup} loading={false} variant="submit" size="md" title="Sign Up"/>
+                                        <p className="text-sm mt-2 text-gray-700"> If already registered ? Click here to 
+                                                 <span onClick={() => Navigate('/signin')} className="text-blue-600 cursor-pointer hover:underline"> Sign in </span> </p>
 
                         </div>
                 </div>
