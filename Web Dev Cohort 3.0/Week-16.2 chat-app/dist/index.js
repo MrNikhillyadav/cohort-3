@@ -6,7 +6,8 @@ let allSockets = [];
 wss.on("connection", (socket) => {
     console.log('user connected');
     socket.on('message', (message) => {
-        const parsedMessage = JSON.parse(message);
+        const parsedMessage = JSON.parse(message); //  convert message from string to object
+        console.log('parsedMessage: ', parsedMessage);
         if (parsedMessage.type === 'join') {
             console.log('user joined room', parsedMessage.payload.roomId);
             allSockets.push({
@@ -26,6 +27,7 @@ wss.on("connection", (socket) => {
             //broadcast msg to all sockets in the same roomId
             for (let i = 0; i < allSockets.length; i++) {
                 if (allSockets[i].roomId == currentUserRoom) {
+                    // convert to string and send to client
                     console.log(JSON.stringify(parsedMessage.payload.message));
                     allSockets[i].socket.send(JSON.stringify(parsedMessage.payload.message));
                 }
