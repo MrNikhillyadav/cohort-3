@@ -12,7 +12,12 @@ dotenv.config();
 const app = express();
 app.use(express.json())
 
-app.use(cors());
+app.use(cors({
+    "origin": "https://brainly-frontend-peach.vercel.app",
+    "methods": "GET,HEAD,PUT,PATCH,POST,DELETE",
+    "preflightContinue": false,
+    "optionsSuccessStatus": 204
+}));
 
 
 //@ts-ignore
