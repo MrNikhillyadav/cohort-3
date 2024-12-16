@@ -11,13 +11,18 @@ dotenv.config();
 
 const app = express();
 
-app.use(cors());
+app.use(cors({
+    origin: '*',
+    methods: ['GET', 'POST', 'PUT', 'DELETE'],
+    allowedHeaders: ['Content-Type', 'Authorization'],
+    credentials: true,
+
+}));
 app.use(express.json())
 
 //@ts-ignore
 mongoose.connect(process.env.MONGO_URL)
 .then(() =>  console.log('db connected'))
-console.log('process.env.MONGO_URL: ', process.env.MONGO_URL);
 
 app.get('/',(req,res) =>{
     res.json({
