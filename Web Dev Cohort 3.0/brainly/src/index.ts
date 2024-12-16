@@ -14,7 +14,7 @@ app.use(express.json())
 // app.use(cors())
 
 app.use(cors({
-    "origin": "http://brainly-frontend-peach.vercel.app",
+    "origin": "https://brainly-frontend-peach.vercel.app",
     "methods": "GET,HEAD,PUT,PATCH,POST,DELETE",
     "preflightContinue": false,
     "optionsSuccessStatus": 204
