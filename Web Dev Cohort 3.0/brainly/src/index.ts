@@ -5,18 +5,14 @@ import jwt from 'jsonwebtoken'
 import { ContentModel, LinkModel, UserModel } from './db/model';
 import { userMiddleware } from './userMiddleware';
 import { JWT_PASSWORD, random } from './config';
+import {any, z} from 'zod'
 import * as dotenv from "dotenv";
 dotenv.config();
 
 const app = express();
 app.use(express.json())
 
-app.use(cors({
-    origin: 'https://brainly-frontend-peach.vercel.app/',
-    methods: ['GET', 'POST', 'PUT', 'DELETE'],
-    allowedHeaders: ['Content-Type', 'Authorization'],
-    credentials: true,
-}));
+app.use(cors());
 
 
 //@ts-ignore
