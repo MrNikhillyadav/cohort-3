@@ -5,15 +5,19 @@ import jwt from 'jsonwebtoken'
 import { ContentModel, LinkModel, UserModel } from './db/model';
 import { userMiddleware } from './userMiddleware';
 import { JWT_PASSWORD, random } from './config';
-import {z} from 'zod'
+import {any, z} from 'zod'
+import * as dotenv from "dotenv";
+dotenv.config();
 
 const app = express();
 
 app.use(cors());
 app.use(express.json())
 
-mongoose.connect("mongodb://localhost:27017/brainly")
+//@ts-ignore
+mongoose.connect(process.env.MONGO_URL)
 .then(() =>  console.log('db connected'))
+console.log('process.env.MONGO_URL: ', process.env.MONGO_URL);
 
 app.get('/',(req,res) =>{
     res.json({
