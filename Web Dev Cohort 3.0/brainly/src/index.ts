@@ -10,15 +10,16 @@ import * as dotenv from "dotenv";
 dotenv.config();
 
 const app = express();
+app.use(express.json())
 
 app.use(cors({
-    origin: '*',
+    origin: 'https://brainly-frontend-peach.vercel.app/',
     methods: ['GET', 'POST', 'PUT', 'DELETE'],
     allowedHeaders: ['Content-Type', 'Authorization'],
     credentials: true,
 
 }));
-app.use(express.json())
+
 
 //@ts-ignore
 mongoose.connect(process.env.MONGO_URL)
