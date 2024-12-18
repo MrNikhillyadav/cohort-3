@@ -45,6 +45,34 @@ app.get('/users', (req, res) => __awaiter(void 0, void 0, void 0, function* () {
         users: users.rows
     });
 }));
+app.get('/metadata', (req, res) => __awaiter(void 0, void 0, void 0, function* () {
+    const id = req.query.id;
+    console.log('id: ', id);
+    try {
+        const query1 = `SELECT username,email,id FROM users WHERE id=$1`;
+        const response1 = yield pgClient.query(query1, [id]);
+        const query2 = `SELECT * FROM addresses WHERE user_id=$1`;
+        const response2 = yield pgClient.query(query2, [id]);
+        res.json({
+            user: response1.rows[0],
+            address: response2.rows
+        });
+    }
+    catch (e) {
+        res.json({
+            error: e
+        });
+    }
+}));
+app.get('/better-metadata', (req, res) => __awaiter(void 0, void 0, void 0, function* () {
+    const id = req.query.id;
+    const query = `SELECT users.username,users.email,users.id,addresses.city,addresses.country,addresses.pincode,addresses.street 
+        FROM users JOIN addresses ON users.id = addresses.user_id WHERE users.id = $1`;
+    const response = yield pgClient.query(query, [id]);
+    res.json({
+        response: response.rows,
+    });
+}));
 app.listen(3000, () => {
     console.log('Port listening at Port 3000');
 });
