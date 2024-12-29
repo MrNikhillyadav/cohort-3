@@ -5,34 +5,31 @@ export async function POST(req:NextRequest){
     const body = await req.json()
 
     const name = body.name;
-    const password = body.password
+    // const password = body.password
 
-    try{
+    
         
-        const user = await prisma.user.find({
+        const user = await prisma.User.findUnique({
             where : {
                 name : name,
-                password : password
+                // password : password
             }
         })
 
-        if(user){
 
+        if(user){
+            
             return NextResponse.json({
                 message : "signed in successfully",
-                   
+                    
+            })
+
+        }else{
+            return NextResponse.json({
+                message : "signed in failed",
+                    
             })
         }
-    }
-    catch(e){
-
-       return NextResponse.json({
-            error : e
-       })
-    }
-
-    
-   
-
-    
+  
+  
 }
