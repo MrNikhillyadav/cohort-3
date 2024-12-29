@@ -12,7 +12,7 @@ async function handleSignIn() {
         const name  = nameRef.current?.value;
         const password = passwordRef.current?.value;
 
-        await axios.post('http://localhost:3000/api/v1/signup', {
+        await axios.post('http://localhost:3000/api/v1/signin', {
                 name, 
                 password 
 
