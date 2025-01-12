@@ -3,18 +3,18 @@ interface ButtonInterface{
   title : string;
   size : "sm" | "md" |"lg";
   variant : 'branding'|'secondary',
-  className : string,
+  className? : string,
   onClick?: () => void
 }
 
 const sizeStyles = {
-  "md" :"rounded-md  px-4 py-2 h-9  ",
-  "lg" :"rounded-md h-12 px-6 py-2  ",
+  "md" :"rounded-md  px-4 py-2 h-10  ",
+  "lg" :"rounded-md h-12 px-4 py-2  ",
 }
 
 const ButtonVariants = {
   "branding" : ' bg-gradient-to-b from-blue-400 to-blue-700 text-white font-medium hover:opacity-80 transition-all duration-300',
-  "secondary" : " hover:bg-white/10 backdrop-blur-sm text-white border-1 border-white/30 ",
+  "secondary" : " bg-white text-black font-medium hover:opacity-80 transition-all duration-300 ",
 }
 
 export  function Button(props : ButtonInterface){ 
