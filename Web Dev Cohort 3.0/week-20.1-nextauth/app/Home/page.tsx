@@ -1,21 +1,22 @@
-'use client'
+import { Greeting } from "@/components/Greeting";
+import { getServerSession } from "next-auth"
+import { redirect } from "next/navigation"
 
-import { useSession, signIn, signOut } from "next-auth/react"
+export default async function Home(){
+    const session = await getServerSession();
+    if(!session?.user) redirect('/')
 
-export  function Dashboard() {
-  const { data: session } = useSession()
-  if (session) {
     return (
-      <div className="text-center">
-        Signed in as {session?.user?.name} <br />
-        <button className="bg-blue-600 outline-none hover:bg-blue-500 text-white px-6 py-2 rounded" onClick={() => signOut()}>Sign out</button>
-      </div>
+        <main className="flex flex-col h-screen text-white items-center bg-black/95 gap-4 pb-16 pt-8">
+        <div className="flex flex-col justify-between gap-4 lg:flex-row">
+          <h1 className="text-wrap text-3xl font-extrabold capitalize tracking-tighter md:text-4xl">
+            <Greeting /> {session.user.name}
+          </h1>
+        </div>
+  
+        <div className="flex h-full flex-col gap-4 rounded-2xl py-4">
+          My Courses
+        </div>
+      </main>
     )
-  }
-  return (
-    <div className="text-center">
-      Not signed in <br />
-      <button className="bg-orange-600 outline-none text-white px-6 py-2 rounded" onClick={() => signIn()}>Sign in</button>
-    </div>
-  )
 }

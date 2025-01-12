@@ -1,12 +1,14 @@
-'use client'
+import { getServerSession } from "next-auth";
+import LandingPage  from "../components/Landing/page";
+import { redirect } from "next/navigation";
 
-import { SessionProvider } from "next-auth/react";
-import { Dashboard } from "./Home/page";
-
-export default function Home() {
+export default async function Home() {
+    const session = await getServerSession();
+    if(session?.user) redirect('/home');
+    
     return (
-        <SessionProvider>
-            <Dashboard />
-        </SessionProvider>
+        <main>
+            <LandingPage />
+        </main>
     );
 }
