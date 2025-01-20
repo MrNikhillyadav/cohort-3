@@ -5,7 +5,7 @@ import { getServerSession } from 'next-auth'
 
 const Home = async () => {
   const session = await getServerSession()
-  if(!session?.user) redirect('/sign-in')
+  if(!session?.user) redirect('/')
 
   return (
     <div  className="flex bg-gray-100 h-screen text-slate-800 gap-12  flex-col justify-center items-center">

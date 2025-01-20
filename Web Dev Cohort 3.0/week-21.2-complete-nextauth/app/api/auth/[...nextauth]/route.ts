@@ -1,6 +1,5 @@
 import NextAuth from "next-auth";
 import CredentialsProvider  from "next-auth/providers/credentials";
-import { redirect } from "next/navigation";
 
 const handler = NextAuth({
     providers: [
@@ -8,7 +7,7 @@ const handler = NextAuth({
             name: "email",
             credentials: {
               username: { label: "email", type: "text", placeholder: "nikhil@gmail.com" },
-              password: { label: "Password", type: "password" }
+              password: { label: "Password", type: "password", placeholder:"*********" }
             },
 
             async authorize(credentials:any) {
@@ -20,7 +19,7 @@ const handler = NextAuth({
                  }
         
                  if (user){
-                    return user
+                    return user;
                 }
                 else {
                     return null
@@ -29,18 +28,6 @@ const handler = NextAuth({
         })
     ],
     secret: process.env.NEXTAUTH_SECRET,
-   callbacks : {
-        jwt ({token,user}){
-            if(user){
-                token.id = user.id
-            }
-            return token
-        },
-        session ({session,token,user}){
-            session.user.id = token.id;
-            return session
-        }
-   }
    
 })
 
