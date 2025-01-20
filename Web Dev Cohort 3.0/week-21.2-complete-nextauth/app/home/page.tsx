@@ -1,7 +1,7 @@
-import { getServerSession } from 'next-auth'
 import Image from 'next/image'
 import { redirect } from 'next/navigation'
 import React from 'react'
+import { getServerSession } from 'next-auth'
 
 const Home = async () => {
   const session = await getServerSession()
@@ -9,7 +9,8 @@ const Home = async () => {
 
   return (
     <div  className="flex bg-gray-100 h-screen text-slate-800 gap-12  flex-col justify-center items-center">
-        <h1 className='text-2xl'>Welcome to the dashboard</h1>
+        <h1 className='text-2xl'>Welcome {session?.user?.name }</h1>
+
         <Image 
             src ="/graph.png"
             width = {800}
@@ -17,6 +18,7 @@ const Home = async () => {
             alt='graph.png'
             className='rounded-xl shadow-md cursor-pointer'
         />
+        
     </div>
   )
 }

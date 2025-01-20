@@ -1,5 +1,6 @@
 import NextAuth from "next-auth";
 import CredentialsProvider  from "next-auth/providers/credentials";
+import { redirect } from "next/navigation";
 
 const handler = NextAuth({
     providers: [
@@ -18,7 +19,7 @@ const handler = NextAuth({
                     password:"1234"
                  }
         
-                if (user) {
+                 if (user){
                     return user
                 }
                 else {
@@ -28,6 +29,18 @@ const handler = NextAuth({
         })
     ],
     secret: process.env.NEXTAUTH_SECRET,
+   callbacks : {
+        jwt ({token,user}){
+            if(user){
+                token.id = user.id
+            }
+            return token
+        },
+        session ({session,token,user}){
+            session.user.id = token.id;
+            return session
+        }
+   }
    
 })
 
