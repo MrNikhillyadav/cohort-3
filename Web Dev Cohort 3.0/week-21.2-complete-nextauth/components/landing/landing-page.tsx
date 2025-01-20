@@ -1,6 +1,7 @@
 import React from 'react'
 
 const LandingPage = () => {
+  
   return (
     <div className="flex h-screen bg-slate-100 text-slate-800 flex-col justify-center items-center">
 

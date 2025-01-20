@@ -1,18 +1,17 @@
-import { signIn } from "next-auth/react";
 import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
-// import { executeAction } from "@/lib/executeAction";
 import Link from "next/link";
 import { redirect } from "next/navigation";
 import { getServerSession } from "next-auth";
 
-const Page = async () => {
+
+const SignUp = async () => {
   const session = await getServerSession();
   if (session) redirect("/");
 
   return (
-    <div className="w-full  max-w-sm mx-auto mt-20 space-y-6">
-      <h1 className="text-2xl font-bold text-center mb-6">Sign In</h1>
+    <div className="w-full max-w-sm mx-auto mt-20 space-y-6">
+      <h1 className="text-2xl font-bold text-center mb-6">Create Account</h1>
 
       <div className="relative">
         <div className="absolute inset-0 flex items-center">
@@ -25,9 +24,10 @@ const Page = async () => {
         </div>
       </div>
 
-      {/* Email/Password Sign In */}
+      {/* Email/Password Sign Up */}
       <form
         className="space-y-4"
+       
       >
         <Input
           name="email"
@@ -41,20 +41,20 @@ const Page = async () => {
           placeholder="Password"
           type="password"
           required
-          autoComplete="current-password"
+          autoComplete="new-password"
         />
         <Button className="w-full" type="submit">
-          Sign In
+          Sign Up
         </Button>
       </form>
 
       <div className="text-center">
         <Button asChild variant="link">
-          <Link href="/sign-up">Don&apos;t have an account? Sign up</Link>
+          <Link href="/sign-in">Already have an account? Sign in</Link>
         </Button>
       </div>
     </div>
   );
 };
 
-export default Page;
+export default SignUp;
