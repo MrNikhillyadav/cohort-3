@@ -8,7 +8,7 @@ import {signOut,signIn, useSession} from "next-auth/react"
 export default function  Navbar(){
     const {data:session} = useSession()
 
-    return <div className=" h-20 absolute top-0 w-full  p-3 flex items-center px-[8vw] justify-between border-b text-white border-white/20 bg-slate-100">
+    return <div className=" h-20 absolute top-0 w-full  p-3 flex items-center px-[8vw] justify-between border-b text-white border-white/20 bg-white">
            <div className="flex justify-center items-center">
                     <Image 
                         width={500}
@@ -25,8 +25,8 @@ export default function  Navbar(){
            <div className="flex items-center justify-center gap-4">
             {!session?.user ? (
                     <>
-                        <Button onClick={() => signIn()} title="Login" variant="secondary" size="lg" />
                         <Button title="Join Now" variant="branding" size="lg" />
+                        <Button onClick={() => signIn()} title="Login" variant="secondary" size="lg" />
                     </> 
                 )
                 :(

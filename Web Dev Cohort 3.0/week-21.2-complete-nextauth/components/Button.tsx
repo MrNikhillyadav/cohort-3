@@ -14,7 +14,7 @@ interface ButtonInterface{
   
   const ButtonVariants = {
     "branding" : ' bg-gradient-to-b from-blue-400 to-blue-700 text-white font-medium hover:opacity-80 transition-all duration-300',
-    "secondary" : " bg-white text-black font-medium shadow-sm hover:opacity-80 transition-all duration-300 ",
+    "secondary" : " text-black/80 font-medium border bg-slate-100 hover:opacity-80 transition-all duration-300 ",
   }
   
   export  function Button(props : ButtonInterface){ 
