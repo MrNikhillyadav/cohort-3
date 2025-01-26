@@ -26,7 +26,7 @@ export function SignUp(){
 
                 })
                 console.log(response)
-                // alert(' Signup Successfull');
+                alert(' Signup Successfull');
                 Navigate('/signin')
                 
                 
