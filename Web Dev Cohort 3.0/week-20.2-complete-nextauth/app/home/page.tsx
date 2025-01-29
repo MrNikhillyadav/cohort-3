@@ -1,23 +1,20 @@
-import Image from 'next/image'
-import { redirect } from 'next/navigation'
 import React from 'react'
 import { getServerSession } from 'next-auth'
+import {SignOut} from '@/components/SignOut'
+import {redirect} from 'next/navigation'
 
-const Home = async () => {
-  const session = await getServerSession()
-  if(!session?.user) redirect('/')
-
+const Home = async() => {
+  const session = await getServerSession();
+  if(!session) redirect('/sign-in');
+  
   return (
-    <div  className="flex bg-gray-100 h-screen text-slate-800 gap-12  flex-col justify-center items-center">
-        <h1 className='text-2xl'>Welcome {session?.user?.name }</h1>
+    <div className="flex h-screen w-full bg-white text-slate-800 flex-col justify-center items-center">
 
-        <Image 
-            src ="/graph.png"
-            width = {800}
-            height= {800}
-            alt='graph.png'
-            className='rounded-xl shadow-md cursor-pointer'
-        />
+        <div className='p-8  rounded-md flex flex-col border border-blue-100  text-center bg-blue-100 bg-opacity-50 w-[22rem]'>
+            <h1 className='text-md'>signed in as {session.user?.name}</h1>
+            <p className='text-[12px] mb-2 text-black/70'>{session.user?.email}</p>
+            <SignOut/>
+        </div>
         
     </div>
   )

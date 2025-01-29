@@ -3,6 +3,7 @@ import { Input } from "@/components/ui/input";
 import Link from "next/link";
 import { redirect } from "next/navigation";
 import { getServerSession } from "next-auth";
+import { handleSignUp } from "@/db/actions";
 
 
 const SignUp = async () => {
@@ -24,11 +25,19 @@ const SignUp = async () => {
         </div>
       </div>
 
-      {/* Email/Password Sign Up */}
+    
       <form
         className="space-y-4"
+        action={handleSignUp}
        
-      >
+      > 
+        <Input
+          name="name"
+          placeholder="John Doe"
+          type="text"
+          required
+          autoComplete="name"
+        />
         <Input
           name="email"
           placeholder="Email"

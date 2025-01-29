@@ -3,6 +3,7 @@
 import Image from "next/image";
 import { Button } from "./Button";
 import {signOut,signIn, useSession} from "next-auth/react"
+import { SignOut } from "./SignOut";
 
 
 export default function  Navbar(){
@@ -19,7 +20,7 @@ export default function  Navbar(){
                     />
                     <p
                         className={`hidden bg-gradient-to-b from-blue-400 to-blue-700 bg-clip-text text-2xl font-black tracking-tighter text-transparent min-[410px]:block`}>
-                        Dub
+                        100xdev
                     </p>
            </div>
            <div className="flex items-center justify-center gap-4">

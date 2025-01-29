@@ -1,46 +1,20 @@
 "use client"
 
-import React, { useRef } from 'react'
+import React from 'react'
+import Link from "next/link";
 import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
-import Link from "next/link";
-import { signIn } from 'next-auth/react';
-import { useRouter } from 'next/navigation';
+import { handleSignIn } from '@/db/actions';
 
 const SignIn = () => {
-    const router = useRouter()
-    const emailRef = useRef(null);
-    const passwordRef = useRef(null);
-
-    const onSubmit = async() =>{
-        if(e) e.preventDefault()
-        
-        const email = emailRef?.current?.value
-        console.log('email: ', email);
-        const password = passwordRef?.current?.value
-        console.log('password: ', password);
-
-       const res =  await signIn('credentials',{
-            username : email,
-            password : password,
-            redirect : false
-        })
-
-        if (!res?.error) {
-            router.push('/home');
-        }
-
-    }
-
   return (
     <div className="w-full  max-w-sm mx-auto mt-20 space-y-6">
       <h1 className="text-2xl font-bold text-center mb-6">Login</h1>
 
       <form
-        onSubmit={form.handleSubmit(onSubmit)}
+        action={handleSignIn}
         className="space-y-4">
         <Input
-          ref = {emailRef}
           name="email"
           placeholder="johndoe@gmail.com"
           type="email"
@@ -48,7 +22,6 @@ const SignIn = () => {
           autoComplete="email"
         />
         <Input
-          ref = {passwordRef}
           name="password"
           placeholder="Password"
           type="password"
@@ -57,7 +30,7 @@ const SignIn = () => {
         />
         <Button 
             className="w-full" type="submit">
-          Login
+          Sign in
         </Button>
       </form>
 
