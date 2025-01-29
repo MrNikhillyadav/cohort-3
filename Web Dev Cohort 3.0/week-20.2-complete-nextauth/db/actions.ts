@@ -1,7 +1,7 @@
 "use server";
 
 import prisma from ".";
-import { RegisterSchema } from "@/lib/zod";
+import { LoginSchema, RegisterSchema } from "@/lib/zod";
 import { signIn } from "next-auth/react";
 import { redirect } from "next/navigation";
 
@@ -30,8 +30,10 @@ export async function handleSignIn(formData : FormData){
     const email = formData.get('email');
     const password = formData.get('password');
 
+    const validatedData = LoginSchema.parse({email,password})
+
     await signIn('credentials',{
-        email,
-        password
+        email: validatedData.email,
+        password: validatedData.password
     }); 
 }
