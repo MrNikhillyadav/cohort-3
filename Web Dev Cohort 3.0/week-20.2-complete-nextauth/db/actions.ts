@@ -25,15 +25,3 @@ export async function handleSignUp(formData:FormData){
        }
    }
 
-export async function handleSignIn(formData : FormData){
-
-    const email = formData.get('email');
-    const password = formData.get('password');
-
-    const validatedData = LoginSchema.parse({email,password})
-
-    await signIn('credentials',{
-        email: validatedData.email,
-        password: validatedData.password
-    }); 
-}
