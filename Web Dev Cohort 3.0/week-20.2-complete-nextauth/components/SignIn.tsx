@@ -6,23 +6,45 @@ import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
 import { signIn } from 'next-auth/react';
 import { LoginSchema } from '@/lib/zod';
-import { redirect } from 'next/navigation';
+import { toast } from 'sonner';
+import { useRouter } from 'next/navigation';
 
 const SignIn = () => {
+  const router = useRouter()
 
    async function handleSignIn(formData : FormData){
+    const loadId = toast.loading('Signing in...');
     const email = formData.get('email');
     const password = formData.get('password');
 
     const validatedData = LoginSchema.parse({email,password});
-    console.log('validatedData',validatedData);
-    const res = await signIn('credentials',validatedData); 
 
-    if(!res?.success){
-      redirect('/')
-    }else(
-      redirect('/home')
-    )
+    const res = await signIn('credentials',
+      {
+        email : validatedData.email,
+        password : validatedData.password,
+        redirect : false,
+
+      }); 
+
+    toast.dismiss(loadId);
+    if(!res?.error){
+      router.push('/home');
+      toast.success('Signed In');
+    }else {
+      if (res.status === 401) {
+        toast.error('Invalid Credentials, try again!');
+      } else if (res.status === 400) {
+        toast.error('Missing Credentials!');
+      } else if (res.status === 404) {
+        toast.error('Account not found!');
+      } else if (res.status === 403) {
+        toast.error('Forbidden!');
+      } else {
+        toast.error('oops something went wrong..!');
+      }
+
+    }
 }
   return (
     <div className="w-full  max-w-sm mx-auto mt-20 space-y-6">

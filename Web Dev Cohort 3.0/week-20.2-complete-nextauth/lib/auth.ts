@@ -1,7 +1,6 @@
 import CredentialsProvider from "next-auth/providers/credentials";
 import prisma from "@/db";
 import { LoginSchema } from "./zod";
-import { v4 as uuid } from "uuid";
 
 export const authOptions = {
     providers: [

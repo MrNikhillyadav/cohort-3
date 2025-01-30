@@ -2,6 +2,7 @@ import type { Metadata } from "next";
 import "./globals.css";
 import Navbar from './../components/Navbar';
 import { Providers } from "./Providers";
+import { Toaster } from "sonner";
 
 export const metadata: Metadata = {
   title: "nextAuth",
@@ -18,8 +19,9 @@ export default function RootLayout({
       <body>
           <Providers>
               <Navbar/>
-          </Providers>
             {children}
+            <Toaster richColors />
+          </Providers>
       </body>
     </html>
   );
