@@ -14,8 +14,14 @@ const SignIn = () => {
 
    async function handleSignIn(formData : FormData){
     const loadId = toast.loading('Signing in...');
+
     const email = formData.get('email');
     const password = formData.get('password');
+
+    if(!email || !password){
+      toast.dismiss(loadId);
+      return;
+    }
 
     const validatedData = LoginSchema.parse({email,password});
 
