@@ -9,16 +9,20 @@ import { LoginSchema } from '@/lib/zod';
 import { redirect } from 'next/navigation';
 
 const SignIn = () => {
+
    async function handleSignIn(formData : FormData){
     const email = formData.get('email');
     const password = formData.get('password');
 
-    const validatedData = LoginSchema.parse({email,password})
-    const user = await signIn('credentials',validatedData); 
+    const validatedData = LoginSchema.parse({email,password});
+    console.log('validatedData',validatedData);
+    const res = await signIn('credentials',validatedData); 
 
-    if(user){
+    if(!res?.success){
+      redirect('/')
+    }else(
       redirect('/home')
-    }
+    )
 }
   return (
     <div className="w-full  max-w-sm mx-auto mt-20 space-y-6">
