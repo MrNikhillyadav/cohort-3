@@ -51,6 +51,10 @@ export default {
   				'5': 'hsl(var(--chart-5))'
   			}
   		},
+		fontFamily : {
+			GeistVF : "GeistVF",
+			GeistMonoVF : "GeistMonoVF",
+		},
   		borderRadius: {
   			lg: 'var(--radius)',
   			md: 'calc(var(--radius) - 2px)',
