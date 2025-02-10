@@ -1,9 +1,11 @@
 import { prisma } from "@/lib/db"
 
 export default async function PostPage({params}) {
+  const {slug } = await params;
+
   const post = await prisma.post.findFirst({
     where : {
-        slug : params.slug
+        slug : slug
     }
   })
 
