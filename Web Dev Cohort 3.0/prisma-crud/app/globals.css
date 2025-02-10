@@ -19,3 +19,13 @@ body {
   background: var(--background);
   font-family: Arial, Helvetica, sans-serif;
 }
+
+h1{
+  font-size: 20px ;
+  font-weight:200;
+}
+
+p{
+  font-size: 12px;
+  color : rgb(57, 56, 56)
+}
