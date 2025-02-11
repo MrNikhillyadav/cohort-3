@@ -19,7 +19,7 @@ export async function addPostToDb(formdata : FormData){
          slug : (formdata.get('content') as string).replace(/\s+/g,"-").toLocaleLowerCase(),
          author : {
           connect :{
-            email : "nikyadav20032003@gmail.com"
+            email : "john@gmail.com"
           },
          }
        }
@@ -39,8 +39,7 @@ export async function addUserToDb(formdata : FormData){
 
     try{
       await prisma.user.create({
-       data : {
-          
+       data : { 
          email,
          hashedPassword,
        }
