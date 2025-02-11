@@ -1,6 +1,5 @@
 import { prisma } from "@/lib/db"
 import Link from "next/link"
-import { addPostToDb } from "@/actions/action";
 
 export default async function AllPostsPage() {
 
@@ -23,14 +22,14 @@ export default async function AllPostsPage() {
       // skip : 1,        //skip the first one
   })
 
-  const PostByUserName = await prisma.user.findUnique({
-    where: {
-      email : "facts.foundr@gmail.com",
-    },
-    include : {
-      posts : true
-    },
-  })
+  // const PostByUserName = await prisma.user.findUnique({
+  //   where: {
+  //     email : "facts.foundr@gmail.com",
+  //   },
+  //   include : {
+  //     posts : true
+  //   },
+  // })
 
   const postCount = await prisma.post.count()
 
@@ -53,31 +52,13 @@ export default async function AllPostsPage() {
                   </div>
                 ))}
               </div>
-              {PostByUserName?.email}
-              <form action={addPostToDb}
-               className="flex flex-col items-center justify-center gap-2"
-              >
-                <input
-                  type="text"
-                  name="title"
-                  placeholder="title"
-                  className="bg-blue-100 border outline-none px-4 text-blue-600 border-blue-300 rounded-md"
-                 />
-                <textarea
-                  rows={3}
-                  name="content"
-                  placeholder="content"
-                  className="bg-blue-100 p-4 border outline-none text-blue-600 border-blue-300 rounded-md"
-                 />
-                 <button
-                 className="bg-blue-600 text-white rounded-md px-4 text-sm py-2"
-                  type="submit"
-                 >
-                  Add post
-                  </button>
 
+                <div className="flex gap-4 justify-center items-center">
+                <Link className="bg-blue-600 rounded-md text-white px-6 py-2 cursor-pointer " href={'/add-new-post'}>Add New Post</Link>
+                <Link className="bg-blue-600 rounded-md text-white px-6 py-2 cursor-pointer " href={'/add-new-user'}>Add new user</Link>
 
-              </form>
+            
+              </div>
         </div>
       </div>
   </>

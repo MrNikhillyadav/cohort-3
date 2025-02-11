@@ -9,7 +9,7 @@ const initialPosts:Prisma.PostCreateInput[] = [
         author : {
             connectOrCreate : {
                 where : {
-                    id: ""
+                    email: "facts.foundr@gmail.com"
                 },
                 create : {
                     email : "facts.foundr@gmail.com",

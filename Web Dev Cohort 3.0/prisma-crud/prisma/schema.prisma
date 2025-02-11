@@ -1,12 +1,9 @@
-// This is your Prisma schema file,
-// learn more about it in the docs: https://pris.ly/d/prisma-schema
-
 generator client {
   provider = "prisma-client-js"
 }
 
 datasource db {
-  provider = "sqlite"
+  provider = "postgresql"
   url      = env("DATABASE_URL")
 }
 
@@ -14,7 +11,7 @@ model User {
   id             String @id @default(cuid())
   email          String @unique
   hashedPassword String
-  posts          Post[]
+  posts          Post?
 }
 
 model Post {
@@ -23,10 +20,10 @@ model Post {
   slug      String   @unique
   content   String
   published Boolean  @default(false)
-  author    User?    @relation(fields: [authorId], references: [id])
   authorId  String   @unique
   createdAt DateTime @default(now()) @map("created_at")
   updatedAt DateTime @updatedAt
+  author    User     @relation(fields: [authorId], references: [id])
 
   @@index([slug])
 }
