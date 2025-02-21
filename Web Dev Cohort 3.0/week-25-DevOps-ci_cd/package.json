@@ -1,5 +1,5 @@
 {
-  "name": "week-25-DevOps-ci_cd",
+  "name": "bms",
   "private": true,
   "scripts": {
     "build": "turbo run build",
