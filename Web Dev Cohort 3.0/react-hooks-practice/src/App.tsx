@@ -1,5 +1,8 @@
+import UseStateHook from "./components/useStateHook";
+
 export default function App(){
-  return <div className="text-black border flex justify-center items-center text-center w-full h-screen">
-    <h1>Hi</h1>
-  </div>
+  return <main  className="flex min-h-screen flex-col items-center justify-center p-24">
+          
+          <UseStateHook/>
+  </main>
 }
