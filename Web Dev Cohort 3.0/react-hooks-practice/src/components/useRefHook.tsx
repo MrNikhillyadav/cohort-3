@@ -8,6 +8,7 @@ export default function UseRefHook(){
     },[])
 
     return <div>
+        <label htmlFor="input">Username </label>
         <input ref={inputRef} type="text" />
         <button>Submit</button>
     </div>
