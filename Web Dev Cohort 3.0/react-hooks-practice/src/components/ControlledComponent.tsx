@@ -1,7 +1,8 @@
 import { useState } from "react"
 
-export default function PropDrilling(){
+export default function ControlledComponent(){
     const [toggleBulb,setToggleBulb] = useState<boolean>(false)
+    
     return <div>
             <h1>Prop drilling in react</h1>
             <ToggleBulb toggleBulb={toggleBulb } setToggleBulb={setToggleBulb} />
