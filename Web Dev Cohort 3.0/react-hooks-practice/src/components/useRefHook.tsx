@@ -3,9 +3,9 @@ import { useEffect, useRef } from "react";
 export default function UseRefHook(){
     const inputRef = useRef(null);
 
-    // useEffect(()=>{
-    //     inputRef.current?.focus();
-    // },[])
+    useEffect(()=>{
+        inputRef.current?.focus();
+    },[])
     
     function handleClick(){
         inputRef.current?.focus();
