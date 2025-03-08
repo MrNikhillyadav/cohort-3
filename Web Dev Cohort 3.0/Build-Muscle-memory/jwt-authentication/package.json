@@ -4,7 +4,7 @@
   "description": "",
   "main": "index.js",
   "scripts": {
-    "build":"tsc -b",
+    "build": "tsc -b",
     "start": "node dist/index.js",
     "dev": "npm run build && npm run start"
   },
@@ -13,7 +13,9 @@
   "license": "ISC",
   "type": "commonjs",
   "dependencies": {
+    "@types/cors": "^2.8.17",
     "@types/express": "^5.0.0",
+    "cors": "^2.8.5",
     "express": "^4.21.2",
     "typescript": "^5.8.2"
   }
