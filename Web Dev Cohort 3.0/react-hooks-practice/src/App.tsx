@@ -2,8 +2,8 @@
 // import UseEffectHook from "./components/useEffectHook";
 // import UseRefHook from "./components/useRefHook";
 // import ControlledComponent from "./components/ControlledComponent";
+// import UseContextHook from "./components/useContextHook";
 
-import UseContextHook from "./components/useContextHook";
 
 
 export default function App(){
@@ -13,7 +13,7 @@ export default function App(){
           {/* <UseEffectHook/> */}
           {/* <UseRefHook/> */}
           {/* <ControlledComponent/> */}
-          <UseContextHook/>
+          {/* <UseContextHook/> */}
 
   </main>
 }
