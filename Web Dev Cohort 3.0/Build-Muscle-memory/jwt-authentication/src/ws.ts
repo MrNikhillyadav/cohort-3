@@ -10,8 +10,8 @@ wss.on('connection', (socket,req) => {
     })
 
     socket.on('message',(message)=>{
-        const parsedMessage = JSON.parse(message as unknown as string);
 
+        const parsedMessage = JSON.parse(message as unknown as string);
         socket.send(JSON.stringify(parsedMessage.payload.message))
     })
 
