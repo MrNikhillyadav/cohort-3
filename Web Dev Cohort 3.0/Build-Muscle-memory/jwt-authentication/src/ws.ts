@@ -5,7 +5,7 @@ const wss = new WebSocketServer({ port : 8080});
 
 wss.on('connection', (socket,req) => {
 
-    socket.on('open',()=>{
+    socket.on('open',()=>{ 
         console.log('Client disconnected!')
     })
 
