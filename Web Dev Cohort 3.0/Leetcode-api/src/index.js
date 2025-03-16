@@ -13,6 +13,13 @@ const errorHandler = require('./middleware/errorHandler');
 
 app.use(errorHandler);
 
+app.get('/api/health', async(req,res) => {
+
+  res.json({
+    message : "server is heatlthy"
+  })
+})
+
 app.get('/api/user/:username', async (req, res) => {
   try {
     const { username } = req.params;
