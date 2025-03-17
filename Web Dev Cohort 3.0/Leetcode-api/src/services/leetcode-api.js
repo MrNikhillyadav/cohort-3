@@ -1,18 +1,15 @@
 // src/services/leetcode-api.js
 const { GraphQLClient, gql } = require('graphql-request');
-require('dotenv').config();
 const cache = require('./cache');
 
 // LeetCode GraphQL endpoint
 const endpoint = 'https://leetcode.com/graphql';
 const client = new GraphQLClient(endpoint);
 
-// Set headers if needed for authentication
+// Basic headers for public API access
 client.setHeaders({
-    Cookie: `LEETCODE_SESSION=${process.env.LEETCODE_SESSION}; csrftoken=${process.env.CSRF_TOKEN}`,
-    'X-Requested-With': 'XMLHttpRequest',
-    Referer: 'https://leetcode.com',
-    Origin: 'https://leetcode.com'
+    'Content-Type': 'application/json',
+    'User-Agent': 'LeetCode Profile Fetcher'
 });
 
 async function getUserInfo(username) {
@@ -43,14 +40,14 @@ async function getUserInfo(username) {
         }
     `;
     
-    const variables = { username }; // Define variables here
+    const variables = { username };
     const result = await client.request(query, variables);
     cache.set(cacheKey, result);
     return result;
 }
 
 async function getProblemsSolved(username) {
-    const cacheKey = `problems_solved_${username}`; // Fixed cache key to be unique
+    const cacheKey = `problems_solved_${username}`;
     const cachedData = cache.get(cacheKey);
     
     if (cachedData) {
@@ -74,14 +71,14 @@ async function getProblemsSolved(username) {
         }
     `;
     
-    const variables = { username }; // Define variables here
+    const variables = { username };
     const result = await client.request(query, variables);
     cache.set(cacheKey, result);
     return result;
 }
 
 async function getSubmissions(username) {
-    const cacheKey = `submissions_${username}`; // Fixed cache key to be unique
+    const cacheKey = `submissions_${username}`;
     const cachedData = cache.get(cacheKey);
     
     if (cachedData) {
@@ -90,7 +87,7 @@ async function getSubmissions(username) {
 
     const query = gql`
         query userSubmissions($username: String!) {
-            recentSubmissionList(username: $username) {
+            recentSubmissionList(username: $username, limit: 20) {
                 id
                 title
                 titleSlug
@@ -101,14 +98,14 @@ async function getSubmissions(username) {
         }
     `;
     
-    const variables = { username }; // Define variables here
+    const variables = { username };
     const result = await client.request(query, variables);
     cache.set(cacheKey, result);
     return result;
 }
 
 async function getActiveYears(username) {
-    const cacheKey = `active_years_${username}`; // Fixed cache key to be unique
+    const cacheKey = `active_years_${username}`;
     const cachedData = cache.get(cacheKey);
     
     if (cachedData) {
@@ -127,14 +124,14 @@ async function getActiveYears(username) {
         }
     `;
     
-    const variables = { username }; // Define variables here
+    const variables = { username };
     const result = await client.request(query, variables);
     cache.set(cacheKey, result);
     return result;
 }
 
 async function getContestsAttended(username) {
-    const cacheKey = `contests_${username}`; // Fixed cache key to be unique
+    const cacheKey = `contests_${username}`;
     const cachedData = cache.get(cacheKey);
     
     if (cachedData) {
@@ -152,14 +149,14 @@ async function getContestsAttended(username) {
         }
     `;
     
-    const variables = { username }; // Define variables here
+    const variables = { username };
     const result = await client.request(query, variables);
     cache.set(cacheKey, result);
     return result;
 }
 
 async function getUserBadges(username) {
-    const cacheKey = `badges_${username}`; // Fixed cache key to be unique
+    const cacheKey = `badges_${username}`;
     const cachedData = cache.get(cacheKey);
     
     if (cachedData) {
@@ -179,7 +176,7 @@ async function getUserBadges(username) {
         }
     `;
     
-    const variables = { username }; // Define variables here
+    const variables = { username };
     const result = await client.request(query, variables);
     cache.set(cacheKey, result);
     return result;

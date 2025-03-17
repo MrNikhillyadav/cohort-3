@@ -2,6 +2,7 @@
 const express = require('express');
 const cors = require('cors');
 const leetcodeApi = require('./services/leetcode-api');
+const apiLimiter = require('./middleware/rateLimit');
 
 const app = express();
 const PORT = process.env.PORT || 3000;
@@ -9,16 +10,15 @@ const PORT = process.env.PORT || 3000;
 app.use(cors());
 app.use(express.json());
 
-const errorHandler = require('./middleware/errorHandler');
+// Apply rate limiting to all API routes
+app.use('/api', apiLimiter);
 
-app.use(errorHandler);
-
-app.get('/api/health', async(req,res) => {
-
+app.get('/api/health', async(req, res) => {
   res.json({
-    message : "server is heatlthy"
-  })
-})
+    message: "server is healthy",
+    status: "up"
+  });
+});
 
 app.get('/api/user/:username', async (req, res) => {
   try {
@@ -27,7 +27,7 @@ app.get('/api/user/:username', async (req, res) => {
     res.json(data);
   } catch (error) {
     console.error('Error fetching user info:', error);
-    res.status(500).json({ error: 'Failed to fetch user info' });
+    res.status(500).json({ error: 'Failed to fetch user info', details: error.message });
   }
 });
 
@@ -38,7 +38,7 @@ app.get('/api/user/:username/problems', async (req, res) => {
     res.json(data);
   } catch (error) {
     console.error('Error fetching problems solved:', error);
-    res.status(500).json({ error: 'Failed to fetch problems solved' });
+    res.status(500).json({ error: 'Failed to fetch problems solved', details: error.message });
   }
 });
 
@@ -49,7 +49,7 @@ app.get('/api/user/:username/submissions', async (req, res) => {
     res.json(data);
   } catch (error) {
     console.error('Error fetching submissions:', error);
-    res.status(500).json({ error: 'Failed to fetch submissions' });
+    res.status(500).json({ error: 'Failed to fetch submissions', details: error.message });
   }
 });
 
@@ -60,7 +60,7 @@ app.get('/api/user/:username/active-years', async (req, res) => {
     res.json(data);
   } catch (error) {
     console.error('Error fetching active years:', error);
-    res.status(500).json({ error: 'Failed to fetch active years' });
+    res.status(500).json({ error: 'Failed to fetch active years', details: error.message });
   }
 });
 
@@ -71,7 +71,7 @@ app.get('/api/user/:username/contests', async (req, res) => {
     res.json(data);
   } catch (error) {
     console.error('Error fetching contests:', error);
-    res.status(500).json({ error: 'Failed to fetch contests' });
+    res.status(500).json({ error: 'Failed to fetch contests', details: error.message });
   }
 });
 
@@ -82,9 +82,13 @@ app.get('/api/user/:username/badges', async (req, res) => {
     res.json(data);
   } catch (error) {
     console.error('Error fetching badges:', error);
-    res.status(500).json({ error: 'Failed to fetch badges' });
+    res.status(500).json({ error: 'Failed to fetch badges', details: error.message });
   }
 });
+
+// Apply error handler as the last middleware
+const errorHandler = require('./middleware/errorHandler');
+app.use(errorHandler);
 
 app.listen(PORT, () => {
   console.log(`Server running on port ${PORT}`);
