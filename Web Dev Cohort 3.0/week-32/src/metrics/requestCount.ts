@@ -8,6 +8,7 @@ export const requestCounter = new client.Counter({
     labelNames: ['method', 'route', 'status_code']
 });
 
+
 export const requestCountMiddleware = (req: Request, res: Response, next: NextFunction) => {
     const startTime = Date.now();
 

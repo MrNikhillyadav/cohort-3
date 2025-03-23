@@ -1,13 +1,15 @@
 import { NextFunction, Request, Response } from "express";
 import { requestCounter } from "./requestCount";
 import { activeRequestsGauge } from "./activeRequests";
+import { httpRequestDurationMicroseconds } from "./requestTime";
 
 export const metricsMiddleware = (req: Request, res: Response, next: NextFunction) => {
     const startTime = Date.now();
+    activeRequestsGauge.inc();
 
     res.on('finish', function() {
         const endTime = Date.now();
-        console.log(`Request took ${endTime - startTime}ms`);
+        const duration = endTime - startTime;
     
         // Increment request counter
         requestCounter.inc({
@@ -15,23 +17,31 @@ export const metricsMiddleware = (req: Request, res: Response, next: NextFunctio
             route: req.route ? req.route.path : req.path,
             status_code: res.statusCode
         });
+
+        httpRequestDurationMicroseconds.observe({
+            method: req.method,
+            route: req.route ? req.route.path : req.path,
+            code: res.statusCode
+        }, duration);
+
+        activeRequestsGauge.dec();
     });
     next();
 }
 
 export const cleanupMiddleware = (req: Request, res: Response, next: NextFunction) => {
-const startTime = Date.now();
-activeRequestsGauge.inc();
+    const startTime = Date.now();
+    activeRequestsGauge.inc();
 
-res.on('finish', function() {
-    const endTime = Date.now();
-    console.log(`Request took ${endTime - startTime}ms`);
-    
-    requestCounter.inc({
-        method: req.method,
-        route: req.route ? req.route.path : req.path,
-        status_code: res.statusCode
+    res.on('finish', function() {
+        const endTime = Date.now();
+        console.log(`Request took ${endTime - startTime}ms`);
+        
+        requestCounter.inc({
+            method: req.method,
+            route: req.route ? req.route.path : req.path,
+            status_code: res.statusCode
+        });
+        activeRequestsGauge.dec();
     });
-    activeRequestsGauge.dec();
-});
 }

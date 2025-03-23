@@ -23,12 +23,20 @@ app.get("/metrics", (req, res) => __awaiter(void 0, void 0, void 0, function* ()
     res.set('Content-Type', prom_client_1.default.register.contentType);
     res.end(metrics);
 }));
-app.get("/user", (req, res) => {
+app.get("/user", (req, res) => __awaiter(void 0, void 0, void 0, function* () {
+    yield new Promise((resolve) => setTimeout(resolve, 1000));
     res.send({
         name: "John Doe",
         age: 25,
     });
-});
+}));
+app.get("/profile", (req, res) => __awaiter(void 0, void 0, void 0, function* () {
+    yield new Promise((resolve) => setTimeout(resolve, 1000));
+    res.send({
+        name: "Nikhil Y",
+        role: "Developer",
+    });
+}));
 app.post("/user", (req, res) => {
     const user = req.body;
     res.send(Object.assign(Object.assign({}, user), { id: 1 }));
