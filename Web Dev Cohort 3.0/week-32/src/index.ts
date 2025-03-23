@@ -1,12 +1,20 @@
+import { metricsMiddleware } from "./metrics";
 import express from "express";
-import { middleware } from "./middleware";
+import client from "prom-client";
 
 const app = express();
+app.use(metricsMiddleware);
 
 app.use(express.json());
-app.use(middleware)
 
-app.get("/user", (req, res) => {
+app.get("/metrics", async (req, res) => {
+    const metrics = await client.register.metrics();
+    res.set('Content-Type', client.register.contentType);
+    res.end(metrics);
+})
+
+app.get("/user", async (req, res) => {
+    await new Promise((resolve) => setTimeout(resolve, 1000));
     res.send({
         name: "John Doe",
         age: 25,
