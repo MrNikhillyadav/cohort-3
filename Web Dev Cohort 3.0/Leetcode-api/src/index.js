@@ -1,4 +1,3 @@
-// src/index.js
 const express = require('express');
 const cors = require('cors');
 const leetcodeApi = require('./services/leetcode-api');
@@ -10,7 +9,6 @@ const PORT = process.env.PORT || 3000;
 app.use(cors());
 app.use(express.json());
 
-// Apply rate limiting to all API routes
 app.use('/api', apiLimiter);
 
 app.get('/api/health', async(req, res) => {

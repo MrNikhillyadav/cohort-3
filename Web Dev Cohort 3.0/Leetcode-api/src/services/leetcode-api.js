@@ -1,12 +1,9 @@
-// src/services/leetcode-api.js
 const { GraphQLClient, gql } = require('graphql-request');
 const cache = require('./cache');
 
-// LeetCode GraphQL endpoint
 const endpoint = 'https://leetcode.com/graphql';
 const client = new GraphQLClient(endpoint);
 
-// Basic headers for public API access
 client.setHeaders({
     'Content-Type': 'application/json',
     'User-Agent': 'LeetCode Profile Fetcher'
