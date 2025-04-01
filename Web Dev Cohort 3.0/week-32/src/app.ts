@@ -20,6 +20,8 @@ app.get("/user", async (req, res) => {
         age: 25,
     });
 });
+
+
 app.get("/profile", async (req, res) => {
     await new Promise((resolve) => setTimeout(resolve, 1000));
     res.send({
