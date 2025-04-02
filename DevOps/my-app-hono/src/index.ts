@@ -6,7 +6,7 @@ const app = new Hono()
 
 app.post('/api/signup', async(c) => {
   const body = await c.req.json()
-  const {username, age } = body;
+  const {username, password } = body;
 
   const prisma = new PrismaClient({
     //@ts-ignore
@@ -16,8 +16,8 @@ app.post('/api/signup', async(c) => {
 
   const user = await prisma.user.create({
     data :{
-      username : username,
-      age : age,
+      username ,
+      password,
     }
   })
 
@@ -29,7 +29,7 @@ app.post('/api/signup', async(c) => {
 
 app.post('/api/signin', async(c) => {
   const body = await c.req.json();
-  const {username }  = body;
+  const {username,password }  = body;
   const prisma = new PrismaClient({
     //@ts-ignore
     datasourceUrl : c.env.DATABASE_URL
@@ -39,6 +39,7 @@ app.post('/api/signin', async(c) => {
   const user = await prisma.user.findFirst({
     where :{
       username,
+      password
     }  
   })
 
