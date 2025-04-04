@@ -1,3 +1,4 @@
+import PropDrilling from "./hook/PropDrilling";
 import { UseRefHook } from "./hook/UseRefHook";
 import { UseState } from "./hook/UseState";
 
@@ -6,7 +7,8 @@ import { UseState } from "./hook/UseState";
   return (
     <div className="text-3xl font-bold underline">
       {/* <UseState/> */}
-      <UseRefHook/>
+      {/* <UseRefHook/> */}
+      <PropDrilling/>
     </div>
   )
 }
