@@ -5,8 +5,8 @@ export default function PropDrilling(){
 
     return (
         <div>
-            <Bulb isOn={isOn} setIsOn={setIsOn} />
-            <SwitchBulb />
+            <Bulb isOn={isOn} />
+            <SwitchBulb isOn={isOn} setIsOn={setIsOn} />
         </div>
     )
 }
@@ -21,10 +21,11 @@ function Bulb({isOn}){
 
 
 function SwitchBulb({isOn,setIsOn}){
+
     function handleToggle(){
         setIsOn(!isOn)
-        
     }
+    
     return (
         <div>
             <button onClick={handleToggle}>Toggle</button>
