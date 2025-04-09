@@ -1,5 +1,6 @@
 import ContextApi from "./hook/ContextApi";
 import PropDrilling from "./hook/PropDrilling";
+import { DebounceHook } from "./hook/UseDebounce";
 import { UseRefHook } from "./hook/UseRefHook";
 import { UseState } from "./hook/UseState";
 
@@ -10,7 +11,8 @@ import { UseState } from "./hook/UseState";
       {/* <UseState/> */}
       {/* <UseRefHook/> */}
       {/* <PropDrilling/> */}
-      < ContextApi />
+      {/* < ContextApi /> */}
+      <DebounceHook/>
     </div>
   )
 }
