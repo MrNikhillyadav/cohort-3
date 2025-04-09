@@ -2,8 +2,9 @@ import { useEffect, useState } from "react";
 
 export function DebounceHook(){
 
-    const [inputValue,setinputValue] = useState(false)
+    const [inputValue,setinputValue] = useState(null)
     const debouncedInput = useDebounce(inputValue,1)
+    console.log('debouncedInput: ', debouncedInput);
 
     useEffect(() => {  
         console.log('expensive call')
