@@ -4,7 +4,7 @@
   "description": "",
   "main": "index.js",
   "scripts": {
-    "start": "nodemon index.js",
+    "start": "nodemon index.js ",
     "dev": "npm run start"
   },
   "keywords": [],
@@ -12,6 +12,8 @@
   "license": "ISC",
   "type": "commonjs",
   "dependencies": {
+    "cors": "^2.8.5",
+    "express": "^5.1.0",
     "nodemon": "^3.1.9",
     "ws": "^8.18.1"
   }
