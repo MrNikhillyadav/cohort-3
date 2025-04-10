@@ -7,6 +7,7 @@ import { UseState } from "./hook/UseState";
 import ReactHookFormValidation from "./InputValidation/ReactHookFormValidation";
 import { SimpleForm } from "./InputValidation/SimpleForm";
 import ZodReactHookFormValidation from "./InputValidation/ZodReactHookFormValidation";
+import {FetchData} from './hook/FetchData';
 
   
  export default function App() {
@@ -21,7 +22,8 @@ import ZodReactHookFormValidation from "./InputValidation/ZodReactHookFormValida
       {/* <ReactHookFormValidation/> */}
       {/* <ZodReactHookFormValidation/> */}
 
-      <DebounceHookPractice/>
+      {/* <DebounceHookPractice/> */}
+      <FetchData/>
     </div>
   )
 }
