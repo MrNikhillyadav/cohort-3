@@ -3,12 +3,11 @@ import { useEffect, useState } from "react";
 export function DebounceHook(){
 
     const [inputValue,setinputValue] = useState(null)
-    const debouncedInput = useDebounce(inputValue,1)
-    console.log('debouncedInput: ', debouncedInput);
+    const debouncedInputValue = useDebounce(inputValue,1)
 
     useEffect(() => {  
         console.log('expensive call')
-    },[debouncedInput])
+    },[debouncedInputValue])
 
     function fetchHandler(e){
         setTimeout(()=> {
@@ -25,19 +24,19 @@ export function DebounceHook(){
     )
 }
 
-function useDebounce(value,delay){
-    const [debouncedValue,setDebouncedValue] = useState(value)
+function useDebounce(inputValue,delay){
+    const [debouncedValue,setDebouncedValue] = useState(inputValue)
 
     useEffect(() => {
         const handler = setTimeout(() => {
-                setDebouncedValue(value)
+                setDebouncedValue(inputValue)
             },delay * 1000)
 
         return () => {
             console.log('cleared')
             clearInterval(handler)
         }
-    },[value,delay])
+    },[inputValue,delay])
 
     return debouncedValue
 }

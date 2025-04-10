@@ -1,4 +1,5 @@
 import ContextApi from "./hook/ContextApi";
+import { DebounceHookPractice } from "./hook/DebounceHook";
 import PropDrilling from "./hook/PropDrilling";
 import { DebounceHook } from "./hook/UseDebounce";
 import { UseRefHook } from "./hook/UseRefHook";
@@ -18,7 +19,9 @@ import ZodReactHookFormValidation from "./InputValidation/ZodReactHookFormValida
       {/* <DebounceHook/> */}
       {/* <SimpleForm/> */}
       {/* <ReactHookFormValidation/> */}
-      <ZodReactHookFormValidation/>
+      {/* <ZodReactHookFormValidation/> */}
+
+      <DebounceHookPractice/>
     </div>
   )
 }
