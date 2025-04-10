@@ -5,6 +5,7 @@ import { UseRefHook } from "./hook/UseRefHook";
 import { UseState } from "./hook/UseState";
 import ReactHookFormValidation from "./InputValidation/ReactHookFormValidation";
 import { SimpleForm } from "./InputValidation/SimpleForm";
+import ZodReactHookFormValidation from "./InputValidation/ZodReactHookFormValidation";
 
   
  export default function App() {
@@ -16,7 +17,8 @@ import { SimpleForm } from "./InputValidation/SimpleForm";
       {/* < ContextApi /> */}
       {/* <DebounceHook/> */}
       {/* <SimpleForm/> */}
-      <ReactHookFormValidation/>
+      {/* <ReactHookFormValidation/> */}
+      <ZodReactHookFormValidation/>
     </div>
   )
 }
