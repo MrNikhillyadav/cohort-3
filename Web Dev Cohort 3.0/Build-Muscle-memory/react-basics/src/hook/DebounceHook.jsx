@@ -8,7 +8,7 @@ export function DebounceHookPractice(){
     const debouncedValue = useDebounceHook(inputValue,1)
 
     useEffect(() => {
-            console.log('expensive call sent')
+            console.log('fetching data from API')
     },[debouncedValue])
     
     return (
