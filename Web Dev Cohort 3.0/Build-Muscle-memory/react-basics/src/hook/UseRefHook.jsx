@@ -1,8 +1,7 @@
-import {useRef } from 'react'
+import { useRef } from 'react'
 
 export  function UseRefHook(){
     const inputRef = useRef('')
-
 
     const handleSubmit = () => {
         let username = inputRef.current.value
