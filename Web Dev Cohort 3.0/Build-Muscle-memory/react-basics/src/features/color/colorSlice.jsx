@@ -6,16 +6,13 @@ export const colorSlice = createSlice({
         value : "black"
     },
     reducers : {
-        changeToBlue(state) {
-            state.value = 'blue'
-        },
-        changeToWhite(state) {
-            state.value = "white"
-        },
+        changeColor(state,actions){
+            state.value = actions.payload;
+        }
     },
 })
 
-export const {changeToBlue,changeToWhite} = colorSlice.actions;
+export const {changeColor} = colorSlice.actions;
 
 export default colorSlice.reducer;
 
