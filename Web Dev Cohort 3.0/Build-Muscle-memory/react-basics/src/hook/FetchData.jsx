@@ -1,26 +1,25 @@
-import React, { useState } from 'react'
+import React, {  useState } from 'react'
 
 export function FetchData() {
     const [data,setData] = useState(null)
 
-    async function fetchData(){
+    async function fetchDataHandler(){
+
         const res = await fetch('https://jsonplaceholder.typicode.com/users')
         const data = await res.json()
-
-        if(data){
-          setData(data)
-        }
+        setData(data)
+  
     }
 
   return (
     <div>
-        {data.map((products) => (
+        {data && data.map((products) => (
           <div key={products.id}> 
             {products.name} {" __   : "}
             {products.email}
           </div>
         ))}
-        <button onClick={fetchData}>fetch</button>
+        <button onClick={fetchDataHandler}>fetch</button>
     </div>
   )
 }
