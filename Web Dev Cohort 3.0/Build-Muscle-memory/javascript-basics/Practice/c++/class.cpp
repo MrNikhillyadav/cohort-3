@@ -7,12 +7,10 @@ public:
     // Constructor
     Dog(string name, int age) : name(name), age(age) {}
 
-    // Method to make the dog bark
     void bark() {
         cout << "Woof! My name is " << name << endl;
     }
 
-    // Method to get the dog's age
     int getAge() {
         return age;
     }
