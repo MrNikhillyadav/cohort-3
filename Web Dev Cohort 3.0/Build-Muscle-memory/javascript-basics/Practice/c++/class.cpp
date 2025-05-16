@@ -3,22 +3,29 @@
 using namespace std;
 
 class Dog {
-public:
-    // Constructor
-    Dog(string name, int age) : name(name), age(age) {}
+    private:
+        // Attributes
+        string name;
+        int age;
 
-    void bark() {
-        cout << "Woof! My name is " << name << endl;
-    }
+    public:
+        // Constructor
+        // best practice : use initialization list
+        Dog( string name, int age) : name(name), age(age) {}
+        // other way :
+        // Dog(string PersonName, int PersonAge){
+        //     name = PersonName;
+        //     age = PersonAge;
+        // } 
 
-    int getAge() {
-        return age;
-    }
+        void bark() {
+            cout << "Woof! My name is " << name << endl;
+        }
 
-private:
-    // Attributes
-    string name;
-    int age;
+        int getAge() {
+            return age;
+        }
+
 };
 
 int main() {
