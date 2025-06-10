@@ -24,6 +24,7 @@ ans()
 
 function PromisifiedGreet(resolve){
     console.log('start')
+    
     setTimeout(() => {
         console.log('2 sec... Hi')
         resolve()
