@@ -7,7 +7,7 @@ const wss = new WebSocketServer({
 wss.on("connection", (socket) => {
 
     socket.on("open",() => {
-        console.log('connected')
+        console.log('connected!')
     })
 
     socket.on("error", ()=>{
@@ -21,7 +21,7 @@ wss.on("connection", (socket) => {
     })
 
     socket.on("close",() => {
-        console.log('connection closed')
+        console.log('connection closed!')
     })
 })
 
