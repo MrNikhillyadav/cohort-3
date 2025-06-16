@@ -19,7 +19,7 @@ export default function Redux() {
 
             <button onClick={() => dispatch(changeColor('blue'))}> blue </button>
             <button onClick={() => dispatch(changeColor('white'))}> white </button>
-            <button onClick={() => dispatch(changeColor('yellow'))}> yellow </button>
+            <button onClick={() => dispatch(changeColor('orange'))}> orange </button>
         </div>
     );
 }
