@@ -26,8 +26,6 @@ async function checkoutPage(Cartitems){
     }
 }
 
-
-
 const items = [
     { id : 1, name : "item-1"},
     { id : 2, name : "item-2"},
@@ -36,3 +34,30 @@ const items = [
 ]
 
 checkoutPage(items)
+
+
+
+// See this beautiful example by running it :
+
+function SleepTimer(t){
+
+    return new Promise((resolve,reject) => {
+
+        setTimeout(() => {
+            resolve(`slept for ${t} sec`)
+        },t*1000)
+    })
+}
+
+const p1 = SleepTimer(8)
+const p2 = SleepTimer(6)
+const p3 = SleepTimer(3)
+
+async function callUsingPromiseAll(){
+    await Promise.all([
+        p1.then((x)=> console.log(x)),
+           p2.then((x)=> console.log(x)),
+              p3.then((x)=> console.log(x))])
+        console.log("completed all promises")
+}
+callUsingPromiseAll()
