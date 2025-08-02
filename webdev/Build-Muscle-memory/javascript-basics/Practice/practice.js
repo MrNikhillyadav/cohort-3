@@ -67,20 +67,3 @@ async function PromisesCall(){
 PromisesCall()
 
 
-// Polyfill
-
-Array.prototype.myFilter = function(callback){
-    let result = [];
-
-    for(let i = 0; i < this.length; i++){
-        if(callback(this[i], i, this)){
-            result.push(this[i])
-        }
-    }
-
-    return result;
-};
-
-const nums = [1,5,6,8]
-const even = nums.myFilter( x => x % 2 == 0);
-
