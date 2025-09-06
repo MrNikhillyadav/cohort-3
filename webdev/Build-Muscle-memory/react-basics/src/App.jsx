@@ -9,7 +9,6 @@ import { SimpleForm } from "./InputValidation/SimpleForm";
 import ZodReactHookFormValidation from "./InputValidation/ZodReactHookFormValidation";
 import {FetchData} from './hook/FetchData';
 import Redux from "./components/redux";
-
   
  export default function App() {
   return (
@@ -25,7 +24,9 @@ import Redux from "./components/redux";
 
       {/* <DebounceHookPractice/> */}
       {/* <FetchData/> */}
-      <Redux/>
+
+      {/* <Redux/> */}
+
     </div>
   )
 }
