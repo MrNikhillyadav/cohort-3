@@ -62,25 +62,19 @@ app.post('/api/v1/signin',(req,res) => {
     const decodedPassword = bcrypt.compare(password,user.password)
 
     if(decodedPassword){
-
-        
         const token = jwt.sign({
             userId : user._id,
         }, 'JWT_SECRET')
 
         res.json({
             message : "logged in successully!",
-            token : token
-            
+            token : token   
         })
     }
     
     res.json({
         message : "password incorrect"
-    })
-
-
-   
+    })   
 })
 
 app.get("/todo",async(req,res) => {
@@ -127,7 +121,6 @@ app.delete("/:id",async(req,res) => {
             error : e.message
         })
     }
-
 })
 
 
