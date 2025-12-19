@@ -91,6 +91,8 @@ const p1 = SleepTimer(8)
 const p2 = SleepTimer(6)
 const p3 = SleepTimer(3)
 
+
+// Runs asynchronously. Output : 3 sec, 6 sec, 8 sec, completed all promises. Total : 8 sec
 async function callUsingPromiseAll(){
     await Promise.all([
         p1.then((x)=> console.log(x)),
@@ -99,4 +101,69 @@ async function callUsingPromiseAll(){
         console.log("completed all promises")
 }
 callUsingPromiseAll()
+
+
+
+
+// What are promises ?
+// Promises are JS objects that represent the eventual completion or failure of an asynchronous 
+// operation. It acts as a placeholder of an async task that will get complete eventually.It can have
+// three states : Pending , fulfilled or rejected.
+
+// Example :
+
+// const p = new Promise((resolve,reject) => {
+//     console.log("sleeping.....")
+//     setTimeout(() => {
+//         resolve('wake up')
+//     }, 3000)
+// })
+// p.then((resp) => {
+//     console.log(resp)
+// })
+
+
+
+// function SetTimeoutPromisified(t){
+//     return new Promise((resolve,reject) => {
+//             console.log(`sleeping.....`)
+
+//             setTimeout(() => {
+//                 console.log(`slept for ${t} sec.....`)
+//                 resolve()
+//             }, t* 1000)
+//         })
+// }
+
+// SetTimeoutPromisified(10)
+// .then((resp) => {
+//     console.log(resp)
+// })
+
+
+// 2sec 5sec 10sec 16sec   runs synchronously : Total duration : 41 sec 
+
+// SetTimeoutPromisified(2)
+// .then(() => {
+//     return SetTimeoutPromisified(5)
+// })
+// .then(() => {
+//     return SetTimeoutPromisified(8)
+// })
+// .then(() => {
+//     return SetTimeoutPromisified(10)
+// })
+// .then(() => {
+//     return SetTimeoutPromisified(16)
+// })
+
+// 2sec 5sec 10sec 16sec   runs asynchronously : Total duration : 16 sec
+
+// Promise.all([
+//     SetTimeoutPromisified(2),
+//     SetTimeoutPromisified(5),
+//     SetTimeoutPromisified(8),
+//     SetTimeoutPromisified(10),
+//     SetTimeoutPromisified(16)
+// ])
 
