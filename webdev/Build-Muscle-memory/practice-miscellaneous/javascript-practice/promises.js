@@ -77,30 +77,28 @@
 
 
 
-function SleepTimer(t){
+// function SleepTimer(t){
+//     return new Promise((resolve,reject) => {
+//         setTimeout(() => {
+//             resolve(`slept for ${t} sec`)
+//         },t*1000)
+//     })
+// }
 
-    return new Promise((resolve,reject) => {
-
-        setTimeout(() => {
-            resolve(`slept for ${t} sec`)
-        },t*1000)
-    })
-}
-
-const p1 = SleepTimer(8)
-const p2 = SleepTimer(6)
-const p3 = SleepTimer(3)
+// const p1 = SleepTimer(8)
+// const p2 = SleepTimer(6)
+// const p3 = SleepTimer(3)
 
 
-// Runs asynchronously. Output : 3 sec, 6 sec, 8 sec, completed all promises. Total : 8 sec
-async function callUsingPromiseAll(){
-    await Promise.all([
-        p1.then((x)=> console.log(x)),
-           p2.then((x)=> console.log(x)),
-              p3.then((x)=> console.log(x))])
-        console.log("completed all promises")
-}
-callUsingPromiseAll()
+// // Runs asynchronously. Output : 3 sec, 6 sec, 8 sec, completed all promises. Total : 8 sec
+// async function callUsingPromiseAll(){
+//     await Promise.all([
+//         p1.then((x)=> console.log(x)),
+//            p2.then((x)=> console.log(x)),
+//               p3.then((x)=> console.log(x))])
+//         console.log("completed all promises")
+// }
+// callUsingPromiseAll()
 
 
 
@@ -124,16 +122,14 @@ callUsingPromiseAll()
 
 
 
-// function SetTimeoutPromisified(t){
-//     return new Promise((resolve,reject) => {
-//             console.log(`sleeping.....`)
-
-//             setTimeout(() => {
-//                 console.log(`slept for ${t} sec.....`)
-//                 resolve()
-//             }, t* 1000)
-//         })
-// }
+function SetTimeoutPromisified(t){
+    return new Promise((resolve,reject) => {
+        setTimeout(() => {
+            console.log(`slept for ${t} sec.....`)
+            resolve()
+        }, t* 1000)
+    })
+}
 
 // SetTimeoutPromisified(10)
 // .then((resp) => {
@@ -159,11 +155,14 @@ callUsingPromiseAll()
 
 // 2sec 5sec 10sec 16sec   runs asynchronously : Total duration : 16 sec
 
-// Promise.all([
-//     SetTimeoutPromisified(2),
-//     SetTimeoutPromisified(5),
-//     SetTimeoutPromisified(8),
-//     SetTimeoutPromisified(10),
-//     SetTimeoutPromisified(16)
-// ])
+Promise.all([
+    SetTimeoutPromisified(2),
+    SetTimeoutPromisified(5),
+    SetTimeoutPromisified(8),
+    SetTimeoutPromisified(10),
+    SetTimeoutPromisified(16)
+])
+
+
+// Note: Promise.all() me direct function me time pass kr rhe hain, synchronous banana h to .then()/async await syntax use krenge.
 

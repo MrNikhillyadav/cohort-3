@@ -64,10 +64,11 @@
 
 function PromisifiedSetTimeout(time){
     return new Promise((resolve) => setTimeout(() => {
-        resolve(`${time} sec have passed`)
+        resolve()
     },time * 1000))
 }
 
+//synchronous code using async/await : 18 seconds total
 async function Solve(){
     await PromisifiedSetTimeout(3)
     console.log("3 sec passed")

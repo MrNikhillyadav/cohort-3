@@ -65,9 +65,6 @@ student1.greeting()
 
 
 
-
-
-
 // ---- Static variables ---------
 
 class Employee {
