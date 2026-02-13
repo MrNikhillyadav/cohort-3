@@ -1,6 +1,6 @@
 
 const axios = require('axios');
-import { pad } from "./config.ts";
+import { pad } from "./lib.ts";
 
 
 console.log(pad(0));

@@ -1,0 +1,22 @@
+<html>
+    <head>
+        <title>Captcha</title>
+        <script src="https://challenges.cloudflare.com/turnstile/v0/api.js" async defer></script>
+    </head>
+    
+    <body>
+        <script>
+            function onSuccess(){
+                console.log("captcha passed successfully")
+            }
+        </script>
+        <div
+            class="cf-turnstile"
+            data-sitekey="0x4AAAAAACb3aAWt61tqkR4f"
+            data-theme="dark"
+            data-size="normal"
+            data-callback="onSuccess">
+        </div>
+        <button>Book Tickets</button>
+    </body>
+</html>

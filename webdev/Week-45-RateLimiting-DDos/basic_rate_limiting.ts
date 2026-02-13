@@ -1,28 +1,8 @@
 import express from "express";
-import { pad } from "./config.ts";
-import rateLimit, { ipKeyGenerator } from "express-rate-limit";
+import { pad } from "./lib.ts";
 
 const app = express();
 app.use(express.json());
-
-const generateOtpLimiter = rateLimit({
-    windowMs: 5 * 60 * 1000, // 5 minutes
-    max: 3, // Limit each IP to 3 OTP requests per windowMs
-    message: 'Too many requests, please try again after 5 minutes',
-    standardHeaders: true, // Return rate limit info in the `RateLimit-*` headers
-    legacyHeaders: false, // Disable the `X-RateLimit-*` headers
-    keyGenerator: (req, res) => ipKeyGenerator(req.body.email),
-});
-
-const verifyOtpLimiter = rateLimit({
-    windowMs:  5 * 60 * 1000, // 5 minutes
-    max: 5, // Limit each IP to 5 password reset requests per windowMs
-    message: 'Too many password reset attempts, please try again after 15 minutes',
-    standardHeaders: true,
-    legacyHeaders: false,
-    keyGenerator: (req, res) => ipKeyGenerator(req.body.email),
-});
-
 
 let validOtps = {};
 let requests  = {};
@@ -32,7 +12,7 @@ setInterval(() => {
     requests = {};
 }, 180 * 1000)
 
-app.post('/generate-otp',generateOtpLimiter, (req, res) => {
+app.post('/generate-otp', (req, res) => {
     const email = req.body.email;
     const otpNumber = Math.floor(Math.random() * 1000000);
     const paddedOtp = pad(otpNumber); 
@@ -45,8 +25,22 @@ app.post('/generate-otp',generateOtpLimiter, (req, res) => {
     });
 });
 
-app.post('/verify-otp',verifyOtpLimiter, (req,res) => {
+app.post('/verify-otp',(req,res) => {
     const {email, otp, newPassword} = req.body;
+
+    if(!requests[email]){
+        requests[email] = 1;
+    }else{
+        requests[email]++;
+    }
+
+     console.log(`Rate limit for ${email}: ${requests[email]}`); // ADD THIS
+
+    if(requests[email] >= 10){
+        return res.status(429).json({
+            message : "Too many requests"
+        })
+    }
 
     if (!email || !otp || !newPassword) {
         return res.status(400).json({ message: "Email, OTP, and new password are required" });
@@ -70,6 +64,9 @@ app.post('/verify-otp',verifyOtpLimiter, (req,res) => {
     }
 })
 
+app.get('/website',(req,res) => {
+    res.sendFile("D:/cohort-3/webdev/Week-45-RateLimiting-DDos/index.html")
+})
 
 app.listen(3000,()=> {
     console.log(`server listening on port 3000`)
