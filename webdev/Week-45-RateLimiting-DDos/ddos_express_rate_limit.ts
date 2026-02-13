@@ -87,6 +87,9 @@ app.post('/verify-otp',verifyOtpLimiter, async(req,res) => {
     }
 })
 
+app.get('/website',(req,res) => {
+    res.sendFile("D:/cohort-3/webdev/Week-45-RateLimiting-DDos/index.html")
+})
 
 app.listen(3000,()=> {
     console.log(`server listening on port 3000`)
