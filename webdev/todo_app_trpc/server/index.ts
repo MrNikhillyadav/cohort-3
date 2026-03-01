@@ -14,6 +14,9 @@ const appRouter = router({
             password : z.string()
         }))
         .mutation(async (opts) => {
+            const username = opts.ctx.username;
+            console.log("username: ", username);
+
             const email  = opts.input.email;
             const password  = opts.input.password;
 
@@ -28,6 +31,9 @@ const appRouter = router({
     createTodo : publicProcedure
         .input(todoInputType)
         .mutation(async (opts) => {
+            const username = opts.ctx.username;
+            console.log("username: ", username);
+            
             const title =  opts.input.title;
             const description = opts.input.description;
 
@@ -37,10 +43,20 @@ const appRouter = router({
             }
         }), 
 
-});
+}); 
+
 
 const server = createHTTPServer({
   router: appRouter,
+  createContext(opts) {
+    let authHeader = opts.req.headers["authorization"];
+    console.log(authHeader);
+
+    //jwt.verify();
+    return {
+        username : "123"
+    }
+  }
 });
  
 server.listen(3000, () => {
