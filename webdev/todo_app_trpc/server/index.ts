@@ -29,7 +29,7 @@ const appRouter = router({
         }),
 
     createTodo : publicProcedure
-        .input(todoInputType)
+        .input(todoInputType)  
         .mutation(async (opts) => {
             const username = opts.ctx.username;
             console.log("username: ", username);
