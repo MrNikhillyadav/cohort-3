@@ -1,5 +1,7 @@
 // prototypal inheritance
 
+//using object :
+
 const animal = {
   speak(){
     console.log(`${this.name} ${this.sound} loud!`)
@@ -15,6 +17,24 @@ const cat = Object.create(animal)
 cat.name = "merry"
 cat.sound = "mews"
 cat.speak()    // merry mews loud!
+
+//using function :
+
+function animal(name,sound) {
+   this.name = name,
+   this.sound = sound,
+    this.intro = function(){
+        console.log(`My pet name is ${this.name}`)
+    }
+}
+
+animal.prototype.speak = function() {
+    console.log(`${this.name} : ${this.sound}`)
+}
+
+let a1 = new animal("bob","barks");
+a1.intro()
+
 
 
 // class inheritance
