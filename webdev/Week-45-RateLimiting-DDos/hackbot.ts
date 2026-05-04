@@ -1,6 +1,5 @@
-
-const axios = require('axios');
 import { pad } from "./lib.ts";
+const axios = require('axios');
 
 
 console.log(pad(0));
@@ -30,7 +29,7 @@ async function SendRequest(otp : string){
 }
 
 async function main(){
-    for(let i= 100000 ; i < 1000000; i+=500){
+    for(let i= 100000 ; i < 1000000; i+=500){ //simulating the hack
         let promises = [];
         console.log(`starting from ${pad(i)}`);
         for(let j = i; j < i + 500; j++){
