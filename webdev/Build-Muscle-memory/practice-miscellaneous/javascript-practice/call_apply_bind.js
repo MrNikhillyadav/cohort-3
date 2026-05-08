@@ -1,18 +1,17 @@
-// function Greeting(greet,name){
-//     console.log(`Hello Mr. ${this.name}, ${greet}`)
-// }
+function Greeting(greet,name){
+    console.log(`Hello Mr. ${this.name}, ${greet}`)
+}
 
-// Greeting("Hi","Ram")
+Greeting("Hi","Ram")
 
-// const person1 = {
-//     name : "Rahul",
-// }
+const person1 = {
+    name : "Rahul",
+}
 
-// Greeting.call(person1,"Good night")
-// Greeting.apply(person1,["Good Morning"])
-// const resp = Greeting.bind(person1,"Good eve")
-// resp()
-
+Greeting.call(person1,"Good night")
+Greeting.apply(person1,["Good Morning"])
+const resp = Greeting.bind(person1,"Good eve")
+resp()
 
 
 
