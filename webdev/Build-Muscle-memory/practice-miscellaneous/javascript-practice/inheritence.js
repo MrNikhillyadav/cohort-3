@@ -62,7 +62,7 @@ const emp2 = new Employee("Karan", "21", "Product Manager");
 emp2.intro();
 
 
-
+//-------------------------------//
 
 class Student extends Employee {
   
