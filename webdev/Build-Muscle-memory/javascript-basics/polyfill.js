@@ -15,16 +15,24 @@ Array.prototype.myFilter = function(callback) {
   
 
 //Polyfill for reduce
-  Array.prototype.myReduce = function(callback, initialValue) {
-    let accumulator = initialValue ?? this[0];
-    for (let i = initialValue ? 0 : 1; i < this.length; i++) {
-      accumulator = callback(accumulator, this[i], i, this);
+   Array.prototype.myReduce = function(callback, initalValue){
+    let accumulator = initalValue ;
+    let startIndex = 0;
+
+    if(initalValue === undefined){
+        accumulator = this[0];
+        startIndex = 1;
     }
+
+    for(let i= startIndex; i < this.length; i++){
+        accumulator = callback(accumulator, this[i], i, this);
+    }
+
     return accumulator;
-  };
-  
-  // Example:
-  const sum = [1, 2, 3].myReduce((acc, val) => acc + val, 0); // 6
+}
+
+const sum = [1,2,6].myReduce((a,b) => a+b,0);  // 0 : starting accumulator value
+console.log(sum);
   
 
   
