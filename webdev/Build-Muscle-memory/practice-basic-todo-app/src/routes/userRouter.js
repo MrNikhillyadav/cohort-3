@@ -17,14 +17,14 @@ userRouter.post('/signup', async(req,res) => {
     })
 
     if(existingUser){
-        res.json({
+        res.status(409).json({
             message : "email already exist"
         })
         return;
     }
 
     if(password.length < 4){
-        res.json({
+        res.status(400).json({
             message : "password too short"
         })
         return;
@@ -45,13 +45,13 @@ userRouter.post('/signup', async(req,res) => {
             })
         }
 
-        res.json({
+        res.status(200).json({
             message : "signed up successfully"
         })
     }
     catch(e){
         
-        res.json({
+        res.status(500).json({
             error : "Internal Server error"
         })
     }
@@ -69,7 +69,7 @@ userRouter.post('/signin', async(req,res) => {
         console.log("user: ", user);
     
         if(!user){
-            res.json({
+            res.status(404).json({
                 message : "user does not exist"
             })
         }
