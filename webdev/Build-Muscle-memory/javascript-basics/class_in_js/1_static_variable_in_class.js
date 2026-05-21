@@ -11,7 +11,7 @@ class User {
     User.userCount++;  // Called on CLASS, not 'this'
   }
 
-  // Instance method (works on each object)
+  // works on each object
   sayHello() {
     console.log(`Hello, I'm ${this.#username}`);
   }
