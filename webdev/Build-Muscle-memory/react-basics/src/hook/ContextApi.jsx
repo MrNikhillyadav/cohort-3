@@ -8,10 +8,12 @@ function ContextApiProvider({children}){
 
     const [toggle, setToggle] = useState(false);
 
-    return ( <BulbContext.Provider 
-            value={{toggle,setToggle }} >
-            {children}
-    </BulbContext.Provider>
+    return 
+    ( 
+        <BulbContext.Provider 
+                value={{toggle,setToggle }} >
+                {children}
+        </BulbContext.Provider>
     )
 }
 
