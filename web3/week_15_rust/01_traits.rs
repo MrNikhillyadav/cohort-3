@@ -1,5 +1,6 @@
 use std::f32::consts::PI;
 
+//trait is a blueprint
 trait Shape {
     fn area(&self) -> f32;
     fn perimeter(&self) -> f32;
@@ -9,7 +10,7 @@ struct Rect {
     width: f32,
     height: f32,
 }
- 
+
 struct Circle {
     radius: f32,
 }
@@ -51,18 +52,4 @@ fn main() {
     println!("circle area :{}", c.area());
     println!("circle perimeter : {}", c.perimeter());
 
-    // Even better, making and calling a generic function
-    println!("rect (area, perimeter) : {:?}", get_perimeter_and_area(&r)); 
-    println!("circle (area, perimeter) : {:?}", get_perimeter_and_area(&c));
-
-}
-
-fn get_perimeter_and_area(shape : &impl Shape)-> (f32,f32) {
-   return (shape.area(), shape.perimeter()); // no return keyword needed, can remove it
-}
-
-// another syntax to do the same is by using Generics :
-
-fn get_perimeter_and_area <T:Shape> (shape :T )-> (f32,f32) {
-   return (shape.area(), shape.perimeter()); 
 }

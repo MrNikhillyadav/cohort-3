@@ -9,7 +9,7 @@ struct Rect {
     width: f32,
     height: f32,
 }
- 
+
 struct Circle {
     radius: f32,
 }
@@ -57,6 +57,10 @@ fn main() {
 
 }
 
+/*
+    Note : If we want our arguments to be either circle | rectangle | something (either a or b or c ) 
+    then we can do something like this ( passing impl Shape ).
+*/
 fn get_perimeter_and_area(shape : &impl Shape)-> (f32,f32) {
    return (shape.area(), shape.perimeter()); // no return keyword needed, can remove it
 }
