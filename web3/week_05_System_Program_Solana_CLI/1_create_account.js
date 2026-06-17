@@ -26,6 +26,6 @@ async function createAccount(){
     console.log("sig: ", sig);
 }
 
-createAccount()
+createAccount();
 
 

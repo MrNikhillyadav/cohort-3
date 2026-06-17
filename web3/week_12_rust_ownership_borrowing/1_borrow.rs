@@ -1,8 +1,9 @@
 
 fn main() {
     let s = String::from("Nikhil");
-   println!("{}", is_longer(&s,10));
-   println!("s: {}", s )
+    
+    println!("{}", is_longer(&s,10));
+    println!("s: {}", s )
 }
 
 fn is_longer(s:&String, num:usize)->bool{

@@ -20,7 +20,7 @@ async function transferToGivenAccount(){
     )
     console.log("txn successful!")
     
-    const sig = await sendAndConfirmTransaction(connection,txn,[payer]); // new need to pass recipient's keypair
+    const sig = await sendAndConfirmTransaction(connection,txn,[payer]); // no need to pass recipient's keypair
     console.log("sig: ", sig);
 }
 

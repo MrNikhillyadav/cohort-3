@@ -21,7 +21,7 @@ fn main(){
         age : 24,
         addresses:vec![
             Address {
-                city : String::from("New D)elhi"),
+                city : String::from("New Delhi"),
                 country : String::from("India"),
                 pincode : String::from("110043")
             }
